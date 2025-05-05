@@ -13,10 +13,10 @@ include 'includes/topbar.php';
       $result = mysqli_query($conn, "SELECT artistID, name FROM artist LIMIT 6");
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-          echo '<div class="card">';
-          echo '<div class="card-img">🎤</div>';
-          echo '<p>' . htmlspecialchars($row['name']) . '</p>';
-          echo '</div>';
+            echo '<div class="card">';
+            echo '<div class="card-img">🎤</div>';
+            echo '<p><a href="artist.php?id=' . $row['artistID'] . '" class="card-title-link">' . htmlspecialchars($row['name']) . '</a></p>';
+            echo '</div>';            
         }
       } else {
         echo '<p>No artists found.</p>';
@@ -33,10 +33,12 @@ include 'includes/topbar.php';
       $result = mysqli_query($conn, "SELECT albumID, title FROM album LIMIT 6");
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-          echo '<div class="card">';
-          echo '<div class="card-img">💿</div>';
-          echo '<p>' . htmlspecialchars($row['title']) . '</p>';
-          echo '</div>';
+            echo '<a href="album.php?id=' . $row['albumID'] . '" class="card-link">';
+            echo '<div class="card">';
+            echo '<div class="card-img">💿</div>';
+            echo '<p>' . htmlspecialchars($row['title']) . '</p>';
+            echo '</div>';
+            echo '</a>';
         }
       } else {
         echo '<p>No albums found.</p>';
