@@ -23,6 +23,9 @@ include 'includes/topbar.php';
       }
       ?>
     </div>
+    <div style="margin-top: 10px;">
+      <a href="artists.php" class="view-all-link">View All Artists →</a>
+    </div>
   </section>
 
   <!-- SECTION: Trending Albums -->
@@ -73,7 +76,5 @@ include 'includes/topbar.php';
   </section>
 </div>
 
-</div> 
-</div>
 </body>
 </html>

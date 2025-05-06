@@ -282,4 +282,20 @@ body {
     background: #1a1a1a;
     border-radius: 6px;
   }
+  .view-all-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0077cc;
+  }
+  .view-all-link:hover {
+    text-decoration: underline;
+  }
+  .card-img-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
   

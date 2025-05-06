@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
@@ -25,6 +25,15 @@ if (mysqli_num_rows($artistQuery) === 0) {
 
 $artist = mysqli_fetch_assoc($artistQuery);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><?php echo htmlspecialchars($artist['name']); ?> - Artist Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
 <div class="homepage">
   <section class="section">
@@ -58,7 +67,5 @@ $artist = mysqli_fetch_assoc($artistQuery);
   </section>
 </div>
 
-</div> 
-</div> 
 </body>
 </html>
