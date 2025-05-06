@@ -1,7 +1,11 @@
-<!-- includes/sidebar.php -->
+<?php
+include 'includes/dbh.php';
+$userID = $_SESSION['userid'] ?? null;
+?>
+
 <aside class="sidebar">
   <div class="sidebar-top">
-    <button class="circle-btn"></button>
+  <a href="home.php" class="circle-btn" title="Home"></a>
     <form class="search-bar">
       <input type="text" placeholder="Search..." />
       <button type="submit">🔍</button>
@@ -12,9 +16,14 @@
   <div class="sidebar-section">
     <h3>My Library</h3>
     <ul class="sidebar-list">
-      <li><a href="/pages/library.php">Playlists</a></li>
-      <li><a href="/pages/library.php">Playlists</a></li>
-      <li><a href="/pages/library.php">Playlists</a></li>
+      <?php
+      if ($userID) {
+        $result = mysqli_query($conn, "SELECT playlistID, name FROM playlist WHERE userID = $userID");
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo '<li><a href="/playlist.php?id=' . $row['playlistID'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
+        }
+      }
+      ?>
     </ul>
   </div>
 </aside>

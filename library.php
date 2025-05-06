@@ -1,15 +1,16 @@
 <?php
-session_start();
-if (!isset($_SESSION['userid'])) {
-  header("Location: login.php");
-  exit();
-}
 
+session_start();
+
+// TEMP: manually simulate login
+if (!isset($_SESSION['userid'])) {
+  $_SESSION['userid'] = 2; // use a real userID from your database
+}
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
-$userID = $_SESSION['userid'];
+$userID = intval($_SESSION['userid']);
 ?>
 
 <div class="homepage">
@@ -17,26 +18,32 @@ $userID = $_SESSION['userid'];
     <h2>My Playlists</h2>
     <div class="grid">
       <?php
-      $result = mysqli_query($conn, "SELECT playlistID, name FROM playlist WHERE userID = $userID");
+      $query = "
+        SELECT playlistID, name 
+        FROM playlist 
+        WHERE userID = $userID
+        ORDER BY name ASC
+      ";
+      $result = mysqli_query($conn, $query);
 
       if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-          echo '<a href="playlist.php?id=' . $row['playlistID'] . '" class="card-link">';
-          echo '<div class="card">';
-          echo '<div class="card-img">📂</div>';
-          echo '<p>' . htmlspecialchars($row['name']) . '</p>';
-          echo '</div>';
+        while ($playlist = mysqli_fetch_assoc($result)) {
+          echo '<a href="playlist.php?id=' . $playlist['playlistID'] . '" class="card-link">';
+          echo '  <div class="card">';
+          echo '    <div class="card-img">🎵</div>';
+          echo '    <p>' . htmlspecialchars($playlist['name']) . '</p>';
+          echo '  </div>';
           echo '</a>';
         }
       } else {
-        echo "<p>You haven't created any playlists yet.</p>";
+        echo '<p>You haven’t created any playlists yet.</p>';
       }
       ?>
     </div>
   </section>
 </div>
 
-</div> 
-</div> 
+</div> <!-- end .main-content -->
+</div> <!-- end .wrapper -->
 </body>
 </html>
