@@ -1,5 +1,6 @@
 <?php
-include 'includes/dbh.php';
+require_once "dbh.php";
+require_once "functions.php";
 
 if (isset($_POST['register'])) {
     $username = trim($_POST['username']);
@@ -9,17 +10,17 @@ if (isset($_POST['register'])) {
 
     // Basic validation
     if (empty($username) || empty($email) || empty($password) || empty($confirm)) {
-        header("Location: register.php?error=emptyfields");
+        header("Location: ../register.php?error=emptyfields");
         exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: register.php?error=invalidemail");
+        header("Location: ../register.php?error=invalidemail");
         exit();
     }
 
     if ($password !== $confirm) {
-        header("Location: register.php?error=passwordmismatch");
+        header("Location: ../register.php?error=passwordmismatch");
         exit();
     }
 
@@ -32,7 +33,7 @@ if (isset($_POST['register'])) {
     mysqli_stmt_store_result($stmt);
 
     if (mysqli_stmt_num_rows($stmt) > 0) {
-        header("Location: register.php?error=usertaken");
+        header("Location: ../register.php?error=usertaken");
         exit();
     }
 
@@ -44,6 +45,6 @@ if (isset($_POST['register'])) {
     mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
     mysqli_stmt_execute($stmt);
 
-    header("Location: login.php?signup=success");
+    header("Location: ../login.php");
     exit();
 }
