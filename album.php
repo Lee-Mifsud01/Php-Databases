@@ -1,9 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['userid'])) {
+/*if (!isset($_SESSION['userid'])) {
   header("Location: login.php");
   exit();
-}
+}*/
 
 include 'includes/dbh.php';
 include 'includes/header.php';

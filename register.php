@@ -10,13 +10,29 @@
   <div class="login-container">
     <h2>Create Your MyTunes Account</h2>
     
-    <form action="/auth/register.inc.php" method="post">
+    <form action="includes/register-inc.php" method="post">
       <input type="text" name="username" placeholder="Username" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="password" placeholder="Password" required>
       <input type="password" name="confirm_password" placeholder="Confirm Password" required>
       <button type="submit" name="register">Register</button>
     </form>
+    <?php
+      if (isset($_GET["error"])){
+        if($_GET["error"] == "passwordmismatch"){
+          echo "<p>Passwords do not match.</p>";
+        }
+        if($_GET["error"] == "invalidemail"){
+          echo "<p>Email is not valid</p>";
+        }
+        if($_GET["error"] == "emptyfields"){
+          echo "<p>Please fill in all the empty fields</p>";
+        } 
+        if($_GET["error"] == "usertaken"){
+          echo "<p>Username is taken</p>";
+        }
+      }
+    ?>
 
     <div class="login-actions">
       <a href="login.php">Already have an account? Log in</a>
