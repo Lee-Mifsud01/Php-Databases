@@ -63,6 +63,8 @@ $artist = mysqli_fetch_assoc($artistQuery);
         echo "<p>No albums found for this artist.</p>";
       }
       ?>
+      <a href="merch.php?artist=<?= $artistID ?>" class="btn-merch">🛍 View Merchandise</a>
+
     </div>
   </section>
 </div>
