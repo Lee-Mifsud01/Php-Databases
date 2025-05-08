@@ -1,8 +1,11 @@
 <?php
 session_start();
+
 include 'includes/dbh.php';
-include 'includes/header.php';
+include 'includes/header.php'; 
 include 'includes/topbar.php';
+
+$userID = $_SESSION['userid'] ?? null;
 ?>
 
 <div class="homepage">
@@ -12,12 +15,12 @@ include 'includes/topbar.php';
     <div class="grid">
       <?php
       $result = mysqli_query($conn, "SELECT artistID, name FROM artist LIMIT 6");
-      if (mysqli_num_rows($result) > 0) {
+      if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<div class="card">';
-            echo '<div class="card-img">🎤</div>';
-            echo '<p><a href="artist.php?id=' . $row['artistID'] . '" class="card-title-link">' . htmlspecialchars($row['name']) . '</a></p>';
-            echo '</div>';            
+          echo '<div class="card">';
+          echo '<div class="card-img">🎤</div>';
+          echo '<p><a href="artist.php?id=' . $row['artistID'] . '" class="card-title-link">' . htmlspecialchars($row['name']) . '</a></p>';
+          echo '</div>';
         }
       } else {
         echo '<p>No artists found.</p>';
@@ -35,14 +38,14 @@ include 'includes/topbar.php';
     <div class="grid">
       <?php
       $result = mysqli_query($conn, "SELECT albumID, title FROM album LIMIT 6");
-      if (mysqli_num_rows($result) > 0) {
+      if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-            echo '<a href="album.php?id=' . $row['albumID'] . '" class="card-link">';
-            echo '<div class="card">';
-            echo '<div class="card-img">💿</div>';
-            echo '<p>' . htmlspecialchars($row['title']) . '</p>';
-            echo '</div>';
-            echo '</a>';
+          echo '<a href="album.php?id=' . $row['albumID'] . '" class="card-link">';
+          echo '<div class="card">';
+          echo '<div class="card-img">💿</div>';
+          echo '<p>' . htmlspecialchars($row['title']) . '</p>';
+          echo '</div>';
+          echo '</a>';
         }
       } else {
         echo '<p>No albums found.</p>';
@@ -62,7 +65,7 @@ include 'includes/topbar.php';
         JOIN album a ON t.albumID = a.albumID
         ORDER BY t.trackID DESC LIMIT 5
       ");
-      if (mysqli_num_rows($result) > 0) {
+      if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
           echo '<div class="list-item">';
           echo '<strong>' . htmlspecialchars($row['track_title']) . '</strong>';
@@ -77,5 +80,7 @@ include 'includes/topbar.php';
   </section>
 </div>
 
+</div> 
+</div> 
 </body>
 </html>
