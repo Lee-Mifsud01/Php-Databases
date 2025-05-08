@@ -7,6 +7,7 @@ if (isset($_POST['register'])) {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
     $confirm = $_POST['confirm_password'];
+    $admin = 0;
 
     // Basic validation
     if (empty($username) || empty($email) || empty($password) || empty($confirm)) {
@@ -39,10 +40,10 @@ if (isset($_POST['register'])) {
 
     // password hashing and insert
     $hashedPwd = password_hash($password, PASSWORD_DEFAULT);
-    $insertSql = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
+    $insertSql = "INSERT INTO user (username, email, password, admin) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $insertSql);
-    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sssi", $username, $email, $hashedPwd, $admin);
     mysqli_stmt_execute($stmt);
 
     header("Location: ../login.php");

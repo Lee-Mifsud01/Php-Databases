@@ -1,17 +1,31 @@
 <?php
 include 'includes/dbh.php';
 $userID = $_SESSION['userid'] ?? null;
+$isAdmin = false;
+
+if ($userID) {
+  $stmt = $conn->prepare("SELECT admin FROM users WHERE userID = ?");
+  $stmt->bind_param("i", $userID);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  if ($row = $result->fetch_assoc()) {
+    $isAdmin = $row['admin'] == 1;
+  }
+  $stmt->close();
+}
 ?>
 
 <aside class="sidebar">
   <div class="sidebar-top">
-  <a href="home.php" class="circle-btn" title="Home"></a>
-  <form class="search-bar" method="GET" action="/php-databases/search.php">
-  <input type="text" name="q" placeholder="Search albums or tracks..." required />
-  <button type="submit">🔍</button>
-</form>
+    <a href="home.php" class="circle-btn" title="Home"></a>
+    <form class="search-bar" method="GET" action="/php-databases/search.php">
+      <input type="text" name="q" placeholder="Search albums or tracks..." required />
+      <button type="submit">🔍</button>
+    </form>
 
-    <a href="/admin/index.php" class="admin-button">Admin Panel</a>
+    <?php if ($isAdmin): ?>
+      <a href="/admin/index.php" class="admin-button">Admin Panel</a>
+    <?php endif; ?>
   </div>
 
   <div class="sidebar-section">
