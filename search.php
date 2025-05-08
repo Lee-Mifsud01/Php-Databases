@@ -40,9 +40,13 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
       <div class="grid">
         <?php
         $albumResult = mysqli_query($conn, "
-          SELECT albumID, title FROM album
-          WHERE title LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%'
+          SELECT DISTINCT a.albumID, a.title
+          FROM album a
+          LEFT JOIN track t ON a.albumID = t.albumID
+          WHERE a.title LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%'
+          OR t.title LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%'
         ");
+      
 
         if (mysqli_num_rows($albumResult) > 0) {
           while ($album = mysqli_fetch_assoc($albumResult)) {
