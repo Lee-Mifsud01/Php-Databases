@@ -43,7 +43,7 @@ $user = mysqli_fetch_assoc($userQuery);
     <div class="login-actions" style="margin-top: 20px;">
       <a href="profile.php" class="button">View Profile</a>
       <a href="settings.php" class="button">Edit Settings</a>
-      <a href="/includes/logout.php" class="button">Log Out</a>
+      <a href="includes/logout-inc.php" class="button">Log Out</a>
     </div>
   </section>
 </div>
