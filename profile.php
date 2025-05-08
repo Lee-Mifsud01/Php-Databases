@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['userid'])) {
+  // TEMP FOR DEVELOPMENT
+  $_SESSION['userid'] = 1; // remove when login starts to work
+}
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
@@ -55,7 +59,7 @@ $user = mysqli_fetch_assoc($userQuery);
   </section>
 </div>
 
-</div> <!-- .main-content -->
-</div> <!-- .wrapper -->
+</div> 
+</div> 
 </body>
 </html>
