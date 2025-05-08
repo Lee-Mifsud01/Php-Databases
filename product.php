@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
