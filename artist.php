@@ -4,70 +4,57 @@ include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-  echo "<p>Invalid artist ID.</p>";
-  exit();
+// Step 1: Get artist ID from URL
+$artistID = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// Step 2: Get artist name from your local DB
+$artistQuery = mysqli_query($conn, "SELECT name FROM artist WHERE artistID = $artistID LIMIT 1");
+$artistRow = mysqli_fetch_assoc($artistQuery);
+$localArtistName = $artistRow['name'] ?? null;
+
+$spotifyArtist = null;
+
+// Step 3: If we have a local artist, use Spotify API
+if ($localArtistName) {
+    $accessToken = "BQCpvPdsnHBnaP7W35CNHIYurfIFx6PaO2I4rg_rnLuCuXz-3t12hGV5Cb2PhAdtwQ3340j-2JlXskPbaZ5Fh0tTbXTFrHrhnCLsfuyS58JhhokhoeSA-mZT6THks2zNmTpUbqfJRoE";// Replace this with your valid token
+
+    $query = urlencode($localArtistName);
+    $url = "https://api.spotify.com/v1/search?q={$query}&type=artist&limit=1";
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Authorization: Bearer $accessToken"
+    ]);
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $spotifyData = json_decode($response, true);
+    $spotifyArtist = $spotifyData['artists']['items'][0] ?? null;
 }
-
-$artistID = intval($_GET['id']);
-
-// Get artist info
-$artistQuery = mysqli_query($conn, "
-  SELECT name, description FROM artist
-  WHERE artistID = $artistID
-  LIMIT 1
-");
-
-if (mysqli_num_rows($artistQuery) === 0) {
-  echo "<p>Artist not found.</p>";
-  exit();
-}
-
-$artist = mysqli_fetch_assoc($artistQuery);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title><?php echo htmlspecialchars($artist['name']); ?> - Artist Page</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="main-content">
+  <?php if ($localArtistName): ?>
+    <h2><?= htmlspecialchars($localArtistName) ?></h2>
 
-<div class="homepage">
-  <section class="section">
-    <h2><?php echo htmlspecialchars($artist['name']); ?></h2>
-    <p><?php echo nl2br(htmlspecialchars($artist['description'])); ?></p>
-  </section>
+    <?php if ($spotifyArtist): ?>
+      <img src="<?= $spotifyArtist['images'][0]['url'] ?>" alt="Artist Image" width="300">
+      <p><strong>Genres:</strong> <?= implode(', ', $spotifyArtist['genres']) ?></p>
+      <p><strong>Followers:</strong> <?= number_format($spotifyArtist['followers']['total']) ?></p>
+      <p><a href="<?= $spotifyArtist['external_urls']['spotify'] ?>" target="_blank">View on Spotify</a></p>
+    <?php else: ?>
+      <p>Spotify data not available.</p>
+    <?php endif; ?>
 
-  <section class="section">
-    <h3>Albums by <?php echo htmlspecialchars($artist['name']); ?></h3>
-    <div class="grid">
-      <?php
-      $albumQuery = mysqli_query($conn, "
-        SELECT albumID, title FROM album
-        WHERE artistID = $artistID
-      ");
-
-      if (mysqli_num_rows($albumQuery) > 0) {
-        while ($album = mysqli_fetch_assoc($albumQuery)) {
-          echo '<a href="album.php?id=' . $album['albumID'] . '" class="card-link">';
-          echo '<div class="card">';
-          echo '<div class="card-img">💿</div>';
-          echo '<p>' . htmlspecialchars($album['title']) . '</p>';
-          echo '</div>';
-          echo '</a>';
-        }
-      } else {
-        echo "<p>No albums found for this artist.</p>";
-      }
-      ?>
-      <a href="merch.php?artist=<?= $artistID ?>" class="btn-merch">🛍 View Merchandise</a>
-
-    </div>
-  </section>
+  <?php else: ?>
+    <p>Artist not found.</p>
+  <?php endif; ?>
 </div>
 
+</div> <!-- .main-content -->
+</div> <!-- .wrapper -->
 </body>
 </html>
