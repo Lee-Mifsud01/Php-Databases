@@ -6,10 +6,11 @@ $userID = $_SESSION['userid'] ?? null;
 <aside class="sidebar">
   <div class="sidebar-top">
   <a href="home.php" class="circle-btn" title="Home"></a>
-    <form class="search-bar">
-      <input type="text" placeholder="Search..." />
-      <button type="submit">🔍</button>
-    </form>
+  <form class="search-bar" method="GET" action="/php-databases/search.php">
+  <input type="text" name="q" placeholder="Search albums or tracks..." required />
+  <button type="submit">🔍</button>
+</form>
+
     <a href="/admin/index.php" class="admin-button">Admin Panel</a>
   </div>
 
