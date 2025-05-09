@@ -1,51 +1,54 @@
 <?php
-session_start();
-
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
-$userID = $_SESSION['userid'] ?? null;
+// TEMPorary USER ID 
+//set this manually while youre not logged in
+$userID = 1; // CHANGE THIS to your user id
 
-////REMOVE COMMENT FROM IF BELOW IF YOU NEED TO ENABLE LOGIN ACCOUNT VERIFICATION
-//(commented out for testing)
+//Function to delete user
+function deleteUser($conn, $deleteID) {
+    //Delete from dependent tables first
+    $tables = ['albumbadge', 'payment', 'playlist'];
+    foreach ($tables as $table) {
+        $stmt = $conn->prepare("DELETE FROM $table WHERE userID = ?");
+        if (!$stmt) {
+            echo "<p style='color:red;'>Error preparing DELETE from $table</p>";
+            return false;
+        }
+        $stmt->bind_param("i", $deleteID);
+        $stmt->execute();
+        $stmt->close();
+    }
 
-/*if (!$userID) {
-    echo "<p>You must be logged in.</p>";
-    exit;
-}*/
-
-// Get admin status
-$isAdmin = false;
-if ($userID !== null) {
-    $stmt = $conn->prepare("SELECT admin FROM user WHERE userID = ?");
-    $stmt->bind_param("i", $userID);
+    
+    $stmt = $conn->prepare("DELETE FROM user WHERE userID = ?");
+    if (!$stmt) {
+        echo "<p style='color:red;'>Error preparing DELETE from user</p>";
+        return false;
+    }
+    $stmt->bind_param("i", $deleteID);
     $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $isAdmin = $row && $row['admin'] == 1;
+    $stmt->close();
+    return true;
 }
 
-//REMOVE COMMENT FROM IF BELOW IF YOU NEED TO ENABLE ADMIN ACCOUNT VERIFICATION
-//(commented out for testing)
 
-/*if (!$isAdmin) {
-    echo "<p>Access denied. Admins only.</p>";
-    exit;
-}*/
 
-// Handle deletion
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $deleteID = (int) $_GET['delete'];
 
-    // Optional: prevent deleting yourself
     if ($deleteID == $userID) {
-        echo "<p>You cannot delete yourself.</p>";
+        echo "<p style='color:red;'>You cannot delete yourself.</p>";
     } else {
-        $stmt = $conn->prepare("DELETE FROM user WHERE userID = ?");
-        $stmt->bind_param("i", $deleteID);
-        $stmt->execute();
-        echo "<p>User with ID $deleteID deleted.</p>";
+        if (deleteUser($conn, $deleteID)) {
+            // Redirect to avoid resubmission
+            header("Location: admin.php");
+            exit();
+        } else {
+            echo "<p style='color:red;'>Failed to delete user.</p>";
+        }
     }
 }
 ?>
