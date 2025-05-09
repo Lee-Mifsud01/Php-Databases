@@ -13,8 +13,8 @@
     <h2>Login to MyTunes</h2>
     
     <form action="includes/login-inc.php" method="POST">
-      <input type="text" name="username" placeholder="Email or username" required>
-      <input type="password" name="password" placeholder="Password" required>
+      <input type="text" name="username" placeholder="Email or username" style="width: 275px;" required>
+      <input type="password" name="password" placeholder="Password" style="width: 275px;" required>
       <button type="submit" name="submit">Log in</button>
     </form>
 

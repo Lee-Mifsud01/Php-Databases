@@ -11,10 +11,10 @@
     <h2>Create Your MyTunes Account</h2>
     
     <form action="includes/register-inc.php" method="post">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+      <input type="text" name="username" placeholder="Username" style="width: 275px;" required>
+      <input type="email" name="email" placeholder="Email" style="width: 275px;" required>
+      <input type="password" name="password" placeholder="Password" style="width: 275px;" required>
+      <input type="password" name="confirm_password" placeholder="Confirm Password" style="width: 275px;" required>
       <button type="submit" name="register">Register</button>
     </form>
     <?php

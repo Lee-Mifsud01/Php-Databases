@@ -2,7 +2,7 @@
 session_start();
 
 // Redirect to login if not logged in
-if (!isset($_SESSION['userid'])) {
+if (!isset($_SESSION['userID'])) {
   header("Location: login.php");
   exit();
 }
@@ -12,7 +12,7 @@ include 'includes/header.php';
 include 'includes/topbar.php';
 
 // Get current logged-in user ID
-$userID = intval($_SESSION['userid']);
+$userID = intval($_SESSION['userID']);
 
 // Fetch user details
 $userQuery = mysqli_query($conn, "
@@ -36,8 +36,8 @@ $user = mysqli_fetch_assoc($userQuery);
 
     <div class="list">
       <div class="list-item"><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></div>
-      <div class="list-item"><strong>Pressing ID:</strong> <?= htmlspecialchars($user['pressingID']) ?></div>
-      <div class="list-item"><strong>Country ID:</strong> <?= htmlspecialchars($user['countryID']) ?></div>
+      <div class="list-item"><strong>Badges:</strong> <?= htmlspecialchars($user['pressingID']) ?></div>
+      <div class="list-item"><strong>Country:</strong> <?= htmlspecialchars($user['countryID']) ?></div>
     </div>
 
     <div class="login-actions" style="margin-top: 20px;">
