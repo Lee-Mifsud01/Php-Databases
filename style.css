@@ -78,6 +78,18 @@ body {
   }
   
   /* ----------------------------- */
+  /* LOGIN WITH GOOGLE STYLES      */
+  /* ----------------------------- */
+
+  .google-btn img {
+    display: block;
+    width: 240px;
+    height: auto;
+    margin: 0 auto;
+  }
+  
+
+  /* ----------------------------- */
   /* SIDEBAR STYLES               */
   /* ----------------------------- */
   .sidebar {

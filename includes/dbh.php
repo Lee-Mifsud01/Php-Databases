@@ -1,4 +1,10 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
+// now getenv('GOOGLE_CLIENT_ID') and getenv('GOOGLE_CLIENT_SECRET') work
+
+
 // Database Handler file
 
 // The following are the server and database details
