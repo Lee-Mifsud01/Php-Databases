@@ -24,7 +24,7 @@ if ($userID) {
     </form>
 
     <?php if ($isAdmin): ?>
-      <a href="/admin/index.php" class="admin-button">Admin Panel</a>
+      <a href="admin.php" class="admin-button">Admin Panel</a>
     <?php endif; ?>
   </div>
 
