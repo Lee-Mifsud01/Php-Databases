@@ -4,7 +4,7 @@ $userID = $_SESSION['userid'] ?? null;
 $isAdmin = false;
 
 if ($userID) {
-  $stmt = $conn->prepare("SELECT admin FROM users WHERE userID = ?");
+  $stmt = $conn->prepare("SELECT admin FROM user WHERE userID = ?");
   $stmt->bind_param("i", $userID);
   $stmt->execute();
   $result = $stmt->get_result();
