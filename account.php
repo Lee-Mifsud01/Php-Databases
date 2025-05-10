@@ -1,52 +1,63 @@
 <?php
 session_start();
 
-// Redirect to login if not logged in
-if (!isset($_SESSION['userID'])) {
-  header("Location: login.php");
+// 1) Make sure we’re using the same session key the login sets
+if (empty($_SESSION['userID'])) {
+  header('Location: login.php');
   exit();
 }
 
-include 'includes/dbh.php';
-include 'includes/header.php';
-include 'includes/topbar.php';
+require_once __DIR__ . '/includes/dbh.php';
+include  __DIR__ . '/includes/header.php';
+include  __DIR__ . '/includes/topbar.php';
 
-// Get current logged-in user ID
-$userID = intval($_SESSION['userID']);
-
-// Fetch user details
-$userQuery = mysqli_query($conn, "
-  SELECT username, email, pressingID, countryID
-  FROM user
-  WHERE userID = $userID
+// 2) Pull username, email, and the country name
+$sql = "
+  SELECT
+    u.username,
+    u.email,
+    COALESCE(c.name, 'N/A') AS country
+  FROM `user` AS u
+  LEFT JOIN `country` AS c
+    ON u.countryID = c.countryID
+  WHERE u.userID = ?
   LIMIT 1
-");
+";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('i', $_SESSION['userID']);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if (!$userQuery || mysqli_num_rows($userQuery) === 0) {
-  echo "<p>User not found.</p>";
+if (!$result || $result->num_rows === 0) {
+  echo '<p>User not found.</p>';
   exit();
 }
 
-$user = mysqli_fetch_assoc($userQuery);
+$user = $result->fetch_assoc();
+$stmt->close();
 ?>
 
 <div class="homepage">
   <section class="section">
-    <h2>Welcome, <?= htmlspecialchars($user['username']) ?></h2>
-
+    <h2>👤 Account</h2>
     <div class="list">
-      <div class="list-item"><strong>Email:</strong> <?= htmlspecialchars($user['email']) ?></div>
-      <div class="list-item"><strong>Badges:</strong> <?= htmlspecialchars($user['pressingID']) ?></div>
-      <div class="list-item"><strong>Country:</strong> <?= htmlspecialchars($user['countryID']) ?></div>
-    </div>
-
-    <div class="login-actions" style="margin-top: 20px;">
-      <a href="profile.php" class="button">View Profile</a>
-      <a href="settings.php" class="button">Edit Settings</a>
-      <a href="includes/logout-inc.php" class="button">Log Out</a>
+      <div class="list-item">
+        <strong>Username:</strong>
+        <?= htmlspecialchars($user['username']) ?>
+      </div>
+      <div class="list-item">
+        <strong>Email:</strong>
+        <?= htmlspecialchars($user['email']) ?>
+      </div>
+      <div class="list-item">
+        <strong>Country:</strong>
+        <?= htmlspecialchars($user['country']) ?>
+      </div>
     </div>
   </section>
 </div>
 
+</div><!-- .main-content -->
+</div><!-- .wrapper -->
 </body>
 </html>

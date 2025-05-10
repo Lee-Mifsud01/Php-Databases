@@ -33,7 +33,7 @@ if ($userID) {
   <div class="sidebar-section">
     <h3>My Library</h3>
     <ul class="sidebar-list">
-      <?php if (!empty($_SESSION['userid'])): ?>
+      <?php if (!empty($_SESSION['userID'])): ?>
         <?php
         $ps = $conn->prepare("
           SELECT playlistID, name
@@ -41,7 +41,7 @@ if ($userID) {
            WHERE userID = ?
            ORDER BY name
         ");
-        $ps->bind_param('i', $_SESSION['userid']);
+        $ps->bind_param('i', $_SESSION['userID']);
         $ps->execute();
         $res = $ps->get_result();
         while ($row = $res->fetch_assoc()):

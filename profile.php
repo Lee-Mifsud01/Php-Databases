@@ -1,15 +1,16 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['userid'])) {
-  // TEMP FOR DEVELOPMENT
-  $_SESSION['userid'] = 1; // remove when login starts to work
+if (!isset($_SESSION['userID'])) {
+  header("Location: login.php");
+  exit();
 }
+
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
-$userID = $_SESSION['userid'];
+$userID = $_SESSION['userID'];
 
 // Get user details (username, email, country name)
 $userQuery = mysqli_query($conn, "

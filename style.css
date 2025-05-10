@@ -398,9 +398,33 @@ body.login-body {
 }
 
 .sidebar .home-btn img {
-  width: 100%;                   /* shrink the icon to 70% of the 40×40px */
+  width: 100%;                   
   height: 100%;
-  object-fit: contain;          /* maintain aspect ratio */
+  object-fit: contain;          
   display: block;
-  margin: auto;                 /* center it in the circle */
+  margin: auto;                 
+}
+
+/* ============================= */
+/* Avatar                        */
+/* ============================= */
+
+.profile-dropdown .avatar-btn {
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+.profile-dropdown .avatar-btn img.avatar-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
