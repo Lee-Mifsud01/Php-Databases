@@ -4,51 +4,67 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+include_once __DIR__ . '/spotify.php';
 include_once __DIR__ . '/dbh.php';
 
+// 1) “Currently Playing” from Spotify (or null)
+$current = getCurrentlyPlaying();
+
+// 2) Avatar lookup — default then override if user has one
 $userID    = $_SESSION['userID'] ?? null;
-$avatarUrl = 'images/avatar-placeholder.jpg';  // default
+$avatarUrl = 'images/avatar-placeholder.jpg';
 
 if ($userID) {
-  // 1) Fetch the user’s imageID → url
-  $stmt = $conn->prepare("
-    SELECT i.url
-      FROM `user` AS u
-      LEFT JOIN `image` AS i
-        ON u.imageID = i.imageID
-     WHERE u.userID = ?
-       AND i.url IS NOT NULL
-     LIMIT 1
-  ");
-  $stmt->bind_param('i', $userID);
-  $stmt->execute();
-  $stmt->bind_result($dbUrl);
-  if ($stmt->fetch()) {
-    $avatarUrl = $dbUrl;
-  }
-  $stmt->close();
+    $stmt = $conn->prepare("
+        SELECT i.url
+          FROM `user` AS u
+          LEFT JOIN `image` AS i
+            ON u.imageID = i.imageID
+         WHERE u.userID = ?
+           AND i.url IS NOT NULL
+         LIMIT 1
+    ");
+    $stmt->bind_param('i', $userID);
+    $stmt->execute();
+    $stmt->bind_result($dbUrl);
+    if ($stmt->fetch()) {
+        $avatarUrl = $dbUrl;
+    }
+    $stmt->close();
 }
 ?>
 <div class="topbar">
+  <!-- Left controls -->
   <div class="topbar-left">
     <button class="circle-btn" aria-label="Previous track">⏮</button>
     <button class="circle-btn" aria-label="Play/Pause">⏯</button>
     <button class="circle-btn" aria-label="Next track">⏭</button>
   </div>
 
+  <!-- Center: currently playing -->
   <div class="track-display">
-    <div class="track-thumbnail" aria-hidden="true"></div>
-    <div>
-      <strong>Track</strong><br>
-      <small>Details</small>
-    </div>
+    <?php if ($current): ?>
+      <img 
+        src="<?= htmlspecialchars($current['album_image']) ?>" 
+        alt="Album art" 
+        class="track-thumbnail-image"
+      >
+      <div>
+        <strong><?= htmlspecialchars($current['track_name']) ?></strong><br>
+        <small><?= htmlspecialchars($current['artists']) ?></small>
+      </div>
+    <?php else: ?>
+      <div class="track-placeholder">
+        <em>Nothing playing</em>
+      </div>
+    <?php endif; ?>
   </div>
 
+  <!-- Right: volume + profile -->
   <div class="topbar-right">
     <input type="range" min="0" max="100" value="70" aria-label="Volume">
 
     <div class="profile-dropdown" tabindex="0" aria-haspopup="true">
-      <!-- 2) Show the avatar image here -->
       <button class="circle-btn avatar-btn" aria-label="User menu">
         <img
           src="<?= htmlspecialchars($avatarUrl) ?>"
@@ -56,7 +72,6 @@ if ($userID) {
           class="avatar-img"
         >
       </button>
-
       <div class="dropdown-menu" role="menu">
         <?php if ($userID): ?>
           <a href="account.php"       role="menuitem">Account</a>
@@ -72,3 +87,5 @@ if ($userID) {
     </div>
   </div>
 </div>
+
+
