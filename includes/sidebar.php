@@ -1,6 +1,7 @@
 <?php
+
 include 'includes/dbh.php';
-$userID = $_SESSION['userid'] ?? null;
+$userID = $_SESSION['userID'] ?? null;
 $isAdmin = false;
 
 if ($userID) {
@@ -27,18 +28,31 @@ if ($userID) {
       <a href="admin.php" class="admin-button">Admin Panel</a>
     <?php endif; ?>
   </div>
-
   <div class="sidebar-section">
     <h3>My Library</h3>
     <ul class="sidebar-list">
-      <?php
-      if ($userID) {
-        $result = mysqli_query($conn, "SELECT playlistID, name FROM playlist WHERE userID = $userID");
-        while ($row = mysqli_fetch_assoc($result)) {
-          echo '<li><a href="/playlist.php?id=' . $row['playlistID'] . '">' . htmlspecialchars($row['name']) . '</a></li>';
-        }
-      }
-      ?>
+      <?php if (!empty($_SESSION['userid'])): ?>
+        <?php
+        $ps = $conn->prepare("
+          SELECT playlistID, name
+            FROM playlist
+           WHERE userID = ?
+           ORDER BY name
+        ");
+        $ps->bind_param('i', $_SESSION['userid']);
+        $ps->execute();
+        $res = $ps->get_result();
+        while ($row = $res->fetch_assoc()):
+        ?>
+          <li>
+            <a href="library.php?playlistID=<?= $row['playlistID'] ?>">
+              <?= htmlspecialchars($row['name']) ?>
+            </a>
+          </li>
+        <?php endwhile; $ps->close(); ?>
+      <?php else: ?>
+        <li><em>Log in to see your playlists</em></li>
+      <?php endif; ?>
     </ul>
   </div>
 </aside>

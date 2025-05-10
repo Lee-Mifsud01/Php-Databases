@@ -6,10 +6,9 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <div class="topbar">
   <div class="topbar-left">
-  <button class="circle-btn">⏮</button> <!-- Previous -->
-<button class="circle-btn">⏯</button> <!-- Play/Pause -->
-<button class="circle-btn">⏭</button> <!-- Next -->
-
+    <button class="circle-btn">⏮</button>
+    <button class="circle-btn">⏯</button>
+    <button class="circle-btn">⏭</button>
   </div>
 
   <div class="track-display">
@@ -24,20 +23,20 @@ if (session_status() === PHP_SESSION_NONE) {
     <input type="range" min="0" max="100" value="70" />
 
     <div class="profile-dropdown">
-      <button class="circle-btn"></button>
-      <?php if (isset($_SESSION["username"])): ?>
-        <div class="dropdown-menu">
+      <button class="circle-btn">👤</button>
+
+      <div class="dropdown-menu">
+        <?php if (!empty($_SESSION['userID'])): ?>
           <a href="account.php">Account</a>
           <a href="profile.php">Profile</a>
           <a href="subscriptions.php">Subscription</a>
           <a href="settings.php">Settings</a>
           <a href="includes/logout-inc.php">Log Out</a>
-        </div>
-      <?php else: ?>
-        <div class="dropdown-menu">
+        <?php else: ?>
           <a href="login.php">Login</a>
-        </div>
-      <?php endif; ?>
+          <a href="register.php">Register</a>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 </div>
