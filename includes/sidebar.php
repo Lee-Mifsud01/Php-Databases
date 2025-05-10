@@ -18,7 +18,9 @@ if ($userID) {
 
 <aside class="sidebar">
   <div class="sidebar-top">
-    <a href="home.php" class="circle-btn" title="Home"></a>
+  <a href="home.php" class="circle-btn home-btn" title="Home">
+  <img src="images/MyTunesLogo.png" alt="Home">
+</a>
     <form class="search-bar" method="GET" action="/php-databases/search.php">
       <input type="text" name="q" placeholder="Search albums or tracks..." required />
       <button type="submit">🔍</button>
