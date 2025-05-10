@@ -1,6 +1,6 @@
 <?php
-$accessToken =  "BQCpvPdsnHBnaP7W35CNHIYurfIFx6PaO2I4rg_rnLuCuXz-3t12hGV5Cb2PhAdtwQ3340j-2JlXskPbaZ5Fh0tTbXTFrHrhnCLsfuyS58JhhokhoeSA-mZT6THks2zNmTpUbqfJRoE"; // Paste your real token here
-$artistName = 'Drake'; // You can make this dynamic later with $_GET['q']
+$accessToken =  "BQBQQaWygKrylu7gMsp0eRk4n6cQTaa5Nf_VQws9WwWw9QmkXNDCbCT-6j1cE2wzgGFuDu6W7d7zuA5RIW7IVCNzvotScO-drziP9qiygydMazxAgH0kars6fMebzvJPrxKC1EaADLg7kcrzdUYeUBhks_95VV8x7q3BTUwlaqyJAUYjmzDSnnmygDzEsTyx3thWQUyu_WTJjNJNdSH26IcpKIKh3NpDE6vdF_Za0Tk"; // access token
+$artistName = 'Drake'; 
 
 // 1. Build Spotify API request
 $query = urlencode($artistName);

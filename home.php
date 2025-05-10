@@ -27,9 +27,6 @@ $userID = $_SESSION['userid'] ?? null;
       }
       ?>
     </div>
-    <div style="margin-top: 10px;">
-      <a href="artists.php" class="view-all-link">View All Artists →</a>
-    </div>
   </section>
 
   <!-- SECTION: Trending Albums -->
