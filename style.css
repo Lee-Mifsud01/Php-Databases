@@ -213,8 +213,8 @@ body.login-body {
 .profile-dropdown .dropdown-menu {
   display: none;
   position: absolute;
-  right: 0;
-  top: 45px;
+  right: -15px;
+  top: 40px;
   background: #222;
   padding: 0.5rem;
   border-radius: 5px;
