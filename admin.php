@@ -1,10 +1,31 @@
 <?php
+session_start();
 include 'includes/dbh.php';
+
+//Check if user is logged in
+if (!isset($_SESSION['userID'])) {
+    header("Location: login.php");
+    exit();
+}
+
+//Check if user is admin
+$userID = $_SESSION['userID'];
+$stmt = $conn->prepare("SELECT admin FROM user WHERE userID = ?");
+$stmt->bind_param("i", $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$stmt->close();
+
+if (!$row || $row['admin'] != 1) {
+    header("Location: index.php"); //redirect non-admins
+    exit();
+}
+
 include 'includes/header.php';
 include 'includes/topbar.php';
 include 'includes/functions.php';
 ?>
-
 
 <div class="section" style="padding: 20px;">
     <h2>Admin Panel - Manage Users</h2>
