@@ -238,7 +238,7 @@ body.login-body {
 }
 
 /* ----------------------------- */
-/* indexPAGE CONTENT SECTIONS    */
+/* INDEX PAGE CONTENT SECTIONS    */
 /* ----------------------------- */
 .section {
   margin-bottom: 3rem;
@@ -387,22 +387,22 @@ body.login-body {
   cursor: pointer;
 }
 
-
 /* ----------------------------- */
 /* index-button icon sizing/clip  */
 /* ----------------------------- */
-.sidebar .index-btn {
-  margin-top: 1rem; 
-  margin-left: 0.5rem; 
-  overflow: hidden;             /* clip anything outside the circle */
+.sidebar .index-btn { 
+  margin-top: 1rem !important; 
+  margin-left: 0.5rem !important; 
+  overflow: hidden !important;             /* clip anything outside the circle */
 }
 
 .sidebar .index-btn img {
-  width: 100%;                   
-  height: 100%;
-  object-fit: contain;          
-  display: block;
-  margin: auto;                 
+  width: 100% !important;                   
+  height: 100% !important;
+  object-fit: contain !important;          
+  display: block !important;
+  margin: auto !important;     
+            
 }
 
 /* ============================= */

@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (empty($_SESSION['userID'])) {
-  header('Location: login.php');
-  exit();
-}
 
 
 include 'includes/dbh.php';
