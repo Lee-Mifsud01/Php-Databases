@@ -1,11 +1,11 @@
 <?php
 
 session_start();
-
-// TEMP: manually simulate login
-if (!isset($_SESSION['userID'])) {
-  $_SESSION['userID'] = 2; // use a real userID from your database
+if (empty($_SESSION['userID'])) {
+  header('Location: login.php');
+  exit();
 }
+
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
@@ -43,7 +43,7 @@ $userID = intval($_SESSION['userID']);
   </section>
 </div>
 
-</div> <!-- end .main-content -->
-</div> <!-- end .wrapper -->
+</div> 
+</div> 
 </body>
 </html>

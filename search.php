@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (empty($_SESSION['userID'])) {
+  header('Location: login.php');
+  exit();
+}
+
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';

@@ -1,7 +1,9 @@
 <?php
-// google-callback.php
-
 session_start();
+if (empty($_SESSION['userID'])) {
+  header('Location: login.php');
+  exit();
+}
 
 // 1) Autoload and load .env
 require_once __DIR__ . '/vendor/autoload.php';

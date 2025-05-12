@@ -5,6 +5,7 @@ include 'includes/topbar.php';
 include 'includes/functions.php';
 ?>
 
+
 <div class="section" style="padding: 20px;">
     <h2>Admin Panel - Manage Users</h2>
 

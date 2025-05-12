@@ -1,4 +1,5 @@
-<?php include 'includes/dbh.php'; ?>
+<?php 
+include 'includes/dbh.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
