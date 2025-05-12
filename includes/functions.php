@@ -74,7 +74,7 @@
         $_SESSION["username"] = $username;
         $_SESSION["userID"] = $user["userID"];
 
-        header("location: ../home.php");
+        header("location: ../index.php");
         exit();
     }
 

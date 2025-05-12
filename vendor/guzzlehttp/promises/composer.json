@@ -7,22 +7,22 @@
         {
             "name": "Graham Campbell",
             "email": "hello@gjcampbell.co.uk",
-            "homepage": "https://github.com/GrahamCampbell"
+            "indexpage": "https://github.com/GrahamCampbell"
         },
         {
             "name": "Michael Dowling",
             "email": "mtdowling@gmail.com",
-            "homepage": "https://github.com/mtdowling"
+            "indexpage": "https://github.com/mtdowling"
         },
         {
             "name": "Tobias Nyholm",
             "email": "tobias.nyholm@gmail.com",
-            "homepage": "https://github.com/Nyholm"
+            "indexpage": "https://github.com/Nyholm"
         },
         {
             "name": "Tobias Schultze",
             "email": "webmaster@tubo-world.de",
-            "homepage": "https://github.com/Tobion"
+            "indexpage": "https://github.com/Tobion"
         }
     ],
     "require": {

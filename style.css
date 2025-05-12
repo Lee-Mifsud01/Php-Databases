@@ -238,7 +238,7 @@ body.login-body {
 }
 
 /* ----------------------------- */
-/* HOMEPAGE CONTENT SECTIONS    */
+/* indexPAGE CONTENT SECTIONS    */
 /* ----------------------------- */
 .section {
   margin-bottom: 3rem;
@@ -389,15 +389,15 @@ body.login-body {
 
 
 /* ----------------------------- */
-/* Home-button icon sizing/clip  */
+/* index-button icon sizing/clip  */
 /* ----------------------------- */
-.sidebar .home-btn {
+.sidebar .index-btn {
   margin-top: 1rem; 
   margin-left: 0.5rem; 
   overflow: hidden;             /* clip anything outside the circle */
 }
 
-.sidebar .home-btn img {
+.sidebar .index-btn img {
   width: 100%;                   
   height: 100%;
   object-fit: contain;          

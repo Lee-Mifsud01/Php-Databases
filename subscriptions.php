@@ -16,7 +16,7 @@ $currentSubID = $userSubRow ? $userSubRow['subscriptionID'] : null;
 $subsQuery = mysqli_query($conn, "SELECT subscriptionID, name, description FROM subscription");
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <section class="section">
     <h2>Subscriptions</h2>
     <div class="grid">

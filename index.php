@@ -5,10 +5,10 @@ include 'includes/dbh.php';
 include 'includes/header.php'; 
 include 'includes/topbar.php';
 
-$userID = $_SESSION['userid'] ?? null;
+$userID = $_SESSION['userID'] ?? null;
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <!-- SECTION: Featured Artists -->
   <section class="section">
     <h2>Featured Artists</h2>

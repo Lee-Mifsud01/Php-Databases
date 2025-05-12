@@ -95,7 +95,7 @@ abstract class CredentialsLoader implements
      * The well known path is OS dependent:
      *
      * * windows: %APPDATA%/gcloud/application_default_credentials.json
-     * * others: $HOME/.config/gcloud/application_default_credentials.json
+     * * others: $index/.config/gcloud/application_default_credentials.json
      *
      * If the file does not exist, this returns null.
      *
@@ -103,7 +103,7 @@ abstract class CredentialsLoader implements
      */
     public static function fromWellKnownFile()
     {
-        $rootEnv = self::isOnWindows() ? 'APPDATA' : 'HOME';
+        $rootEnv = self::isOnWindows() ? 'APPDATA' : 'index';
         $path = [self::getEnv($rootEnv)];
         if (!self::isOnWindows()) {
             $path[] = self::NON_WINDOWS_WELL_KNOWN_PATH_BASE;
@@ -259,7 +259,7 @@ abstract class CredentialsLoader implements
      */
     private static function loadDefaultClientCertSourceFile()
     {
-        $rootEnv = self::isOnWindows() ? 'APPDATA' : 'HOME';
+        $rootEnv = self::isOnWindows() ? 'APPDATA' : 'index';
         $path = sprintf('%s/%s', self::getEnv($rootEnv), self::MTLS_WELL_KNOWN_PATH);
         if (!file_exists($path)) {
             return null;

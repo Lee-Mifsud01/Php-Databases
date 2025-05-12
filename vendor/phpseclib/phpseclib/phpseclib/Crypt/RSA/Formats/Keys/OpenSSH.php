@@ -5,7 +5,7 @@
  *
  * PHP version 5
  *
- * Place in $HOME/.ssh/authorized_keys
+ * Place in $index/.ssh/authorized_keys
  *
  * @author    Jim Wigginton <terrafrost@php.net>
  * @copyright 2015 Jim Wigginton

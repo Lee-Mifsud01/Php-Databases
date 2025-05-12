@@ -21,13 +21,13 @@
       {
         "name":     "Paragon Initiative Enterprises",
         "email":    "security@paragonie.com",
-        "homepage": "https://paragonie.com",
+        "indexpage": "https://paragonie.com",
         "role":     "Maintainer"
       },
       {
         "name":     "Steve 'Sc00bz' Thomas",
         "email":    "steve@tobtu.com",
-        "homepage": "https://www.tobtu.com",
+        "indexpage": "https://www.tobtu.com",
         "role":     "Original Developer"
       }
   ],

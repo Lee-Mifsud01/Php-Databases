@@ -13,7 +13,7 @@ include 'includes/topbar.php';
 $userID = intval($_SESSION['userid']);
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <section class="section">
     <h2>My Playlists</h2>
     <div class="grid">

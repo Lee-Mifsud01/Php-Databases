@@ -2,7 +2,7 @@
     "name": "symfony/deprecation-contracts",
     "type": "library",
     "description": "A generic function and convention to trigger deprecation notices",
-    "homepage": "https://symfony.com",
+    "indexpage": "https://symfony.com",
     "license": "MIT",
     "authors": [
         {
@@ -11,7 +11,7 @@
         },
         {
             "name": "Symfony Community",
-            "homepage": "https://symfony.com/contributors"
+            "indexpage": "https://symfony.com/contributors"
         }
     ],
     "require": {
