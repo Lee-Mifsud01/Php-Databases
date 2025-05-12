@@ -1,20 +1,31 @@
 <?php
 session_start();
-require_once 'dbh.php'; 
+include 'dbh.php';
 
-if (isset($_POST['countryID'], $_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-    $countryID = intval($_POST['countryID']);
+$userID = $_SESSION['userID'] ?? null;
 
-    $sql = "UPDATE user SET countryID = ? WHERE userID = ?";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ii", $countryID, $userID);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-
-    header("Location: ../profile.php?update=success");
-    exit();
-} else {
-    header("Location: ../profile.php?update=failed");
-    exit();
+if (!$userID) {
+  header("Location: ../login.php");
+  exit();
 }
+
+// Update country
+if (isset($_POST['countryID']) && !empty($_POST['countryID'])) {
+  $countryID = intval($_POST['countryID']);
+  $stmt = $conn->prepare("UPDATE user SET countryID = ? WHERE userID = ?");
+  $stmt->bind_param("ii", $countryID, $userID);
+  $stmt->execute();
+  $stmt->close();
+}
+
+// Update region
+if (isset($_POST['regionID']) && !empty($_POST['regionID'])) {
+  $regionID = intval($_POST['regionID']);
+  $stmt = $conn->prepare("UPDATE user SET regionID = ? WHERE userID = ?");
+  $stmt->bind_param("ii", $regionID, $userID);
+  $stmt->execute();
+  $stmt->close();
+}
+
+header("Location: ../profile.php?updated=1");
+exit();

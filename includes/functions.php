@@ -123,4 +123,90 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     }
 }
 
+
+// Function to get the currently playing track
+function getCurrentlyPlaying(): ?array {
+    $token = ensureSpotifyToken();
+    if (!$token) {
+        return null;
+    }
+
+    $ch = curl_init('https://api.spotify.com/v1/me/player/currently-playing');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER     => [
+            "Authorization: Bearer $token",
+        ],
+    ]);
+    $resp = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($code !== 200) {
+        return null; // Handle errors or no track playing
+    }
+
+    $data = json_decode($resp, true);
+    if (empty($data['item'])) {
+        return null; // No track playing
+    }
+
+    $item = $data['item'];
+    $artists = array_map(fn($a) => $a['name'], $item['artists']);
+    $img = end($item['album']['images'])['url'];
+
+    return [
+        'track_name'  => $item['name'],
+        'artists'     => implode(', ', $artists),
+        'album_image' => $img,
+    ];
+}
+
+// Function to ensure we have a valid Spotify token (refresh if needed)
+function ensureSpotifyToken(): string {
+    // Check if the token exists or if it is expired
+    if (empty($_SESSION['BQD-FIeuIT5__g2IJXr5sfGZhZ8uGUfKt_BxNN2AMSt3_n9A8WR-hYFBUMkaES4dL3D-cu0D_JVTVwLzGWxGcnDp4Cgap12VsWhN3s2kjlzCSP26VuVX0BqsrDtJy3oy_Z3cRTWzfSyuAqNxEpdaPDSugLosfXkfAGOyvGq7y9XMDE53CgmAmHT6TIhIdG5orWcdozklRU8VQb9s1EcioO-QnQSt9ffvFdrat399oUuDq3xoLVOPP3cVRuM']) || time() >= ($_SESSION['spotify_token_expires'] ?? 0)) {
+        // Refresh the token if expired or not available
+        if (empty($_SESSION['AQAIVIJHyXzMbsaokqkF4mPh8DU-c5HMeESYwQ9eENKSZNU0x2Pu_JMUTjhgN63FmOs9wfn1CSqWcZXj5Yz8-_tIhpf3KgeGdDF4ok_RQSulPgnTHlGnvPtApdQKE3reiJ8'])) {
+            return ''; // No refresh token to refresh the access token
+        }
+
+        // Prepare client credentials
+        $clientId = '477236a2dcd14d22b77da8db52f2b077D'; // Replace with your actual Spotify client ID
+        $clientSecret = '9500a9368925432ca4d5c3e0d3b86de8'; // Replace with your actual Spotify client secret
+        $refreshToken = $_SESSION['AQAIVIJHyXzMbsaokqkF4mPh8DU-c5HMeESYwQ9eENKSZNU0x2Pu_JMUTjhgN63FmOs9wfn1CSqWcZXj5Yz8-_tIhpf3KgeGdDF4ok_RQSulPgnTHlGnvPtApdQKE3reiJ8'];
+
+        // Make a request to refresh the token
+        $ch = curl_init('https://accounts.spotify.com/api/token');
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Basic ' . base64_encode("$clientId:$clientSecret"),
+                'Content-Type: application/x-www-form-urlencoded',
+            ],
+            CURLOPT_POSTFIELDS => http_build_query([
+                'grant_type' => 'refresh_token',
+                'refresh_token' => $refreshToken,
+            ]),
+        ]);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        // Decode the response
+        $data = json_decode($response, true);
+        if (isset($data['access_token'])) {
+            // Store the new access token and expiration time in session
+            $_SESSION['9500a9368925432ca4d5c3e0d3b86de8'] = $data['9500a9368925432ca4d5c3e0d3b86de8'];
+            $_SESSION[3600] = time() + $data['expires_in'];
+            return $_SESSION['spotify_access_token'];
+        } else {
+            return ''; // Failed to refresh token
+        }
+    }
+
+    return $_SESSION['spotify_access_token']; // Return the existing access token
+}
+
+
 ?>

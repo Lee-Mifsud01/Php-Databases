@@ -182,14 +182,15 @@ body.login-body {
 .track-display {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;  /* This centers the image horizontally */
+  gap: 1rem;  /* Adjust gap if needed */
+  text-align: center; 
 }
 
-.track-thumbnail {
-  width: 30px;
-  height: 30px;
-  background-color: #ccc;
+.track-display h2 {
+  font-size: 1rem ;
 }
+
 
 /* Generic circular buttons (prev/play/next, etc.) */
 .circle-btn {

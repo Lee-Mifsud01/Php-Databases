@@ -1,16 +1,48 @@
 <?php
-// includes/topbar.php
+// Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include_once __DIR__ . '/spotify.php';
-include_once __DIR__ . '/dbh.php';
+//  Get the access token 
+$accessToken = "BQBFvkmKqj5oeh3irEkk5f1c-X5qghdB7XLrOouDM4O3BYl2G3J03snEMBgIeUpADAfKo2_X-tJ80XFm8xAq1R_W2CkMtetJX4sU0_QAt_b1wpTC6Ux3NjCBD_tP1gik1aMTytQMBmjQtz4MhgY02bUfZTOHT5wc5EPQzU17AivdNN3wRR5FHZUTMfy8NH7VKYGq6-UJ2IbN0eM-zIUeNCLZ-kXT9l6D8aN-_uf_yuDweNpenIZnoAfKh8A"; // Replace this with your actual access token
 
-// 1) “Currently Playing” from Spotify (or null)
+// Set up the Spotify API URL for the "currently playing" track
+$url = "https://api.spotify.com/v1/me/player/currently-playing";
+
+//  Make the API request
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Authorization: Bearer $accessToken"
+]);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+// Decode the response
+$currentTrackData = json_decode($response, true);
+
+//  Check if there's a track playing
+if (isset($currentTrackData['item'])) {
+    $trackName = $currentTrackData['item']['name'];
+    $trackArtists = implode(', ', array_map(fn($artist) => $artist['name'], $currentTrackData['item']['artists']));
+    $albumImage = $currentTrackData['item']['album']['images'][0]['url'];
+} else {
+    // No track is currently playing
+    $trackName = null;
+    $trackArtists = null;
+    $albumImage = null;
+}
+
+include_once __DIR__ . '/functions.php';  // this file contains getCurrentlyPlaying() and ensureSpotifyToken()
+include_once __DIR__ . '/dbh.php'; 
+
+// Get the currently playing track from Spotify (or null if no track is playing)
 $current = getCurrentlyPlaying();
 
-// 2) Avatar lookup — default then override if user has one
+// Avatar lookup — default then override if user has one
 $userID    = $_SESSION['userID'] ?? null;
 $avatarUrl = 'images/avatar-placeholder.jpg';
 
@@ -33,6 +65,7 @@ if ($userID) {
     $stmt->close();
 }
 ?>
+
 <div class="topbar">
   <!-- Left controls -->
   <div class="topbar-left">
@@ -43,22 +76,18 @@ if ($userID) {
 
   <!-- Center: currently playing -->
   <div class="track-display">
-    <?php if ($current): ?>
-      <img 
-        src="<?= htmlspecialchars($current['album_image']) ?>" 
-        alt="Album art" 
-        class="track-thumbnail-image"
-      >
-      <div>
-        <strong><?= htmlspecialchars($current['track_name']) ?></strong><br>
-        <small><?= htmlspecialchars($current['artists']) ?></small>
-      </div>
-    <?php else: ?>
-      <div class="track-placeholder">
-        <em>Nothing playing</em>
-      </div>
-    <?php endif; ?>
-  </div>
+  <?php if ($trackName): ?>
+    <h2>Currently Playing: <?= htmlspecialchars($trackName) ?></h2>
+    
+    <!--  album image links to spotify -->
+    <a href="https://open.spotify.com/track/<?= htmlspecialchars($currentTrackData['item']['id']) ?>" target="_blank">
+      <img src="<?= htmlspecialchars($albumImage) ?>" alt="Album Image" width="100">
+    </a>
+    
+  <?php else: ?>
+    <p>No track is currently playing.</p>
+  <?php endif; ?>
+
 
   <!-- Right: volume + profile -->
   <div class="topbar-right">
@@ -87,5 +116,4 @@ if ($userID) {
     </div>
   </div>
 </div>
-
-
+        </div>
