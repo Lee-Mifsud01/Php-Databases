@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// 1) Make sure we’re using the same session key the login sets
 if (empty($_SESSION['userID'])) {
   header('Location: login.php');
   exit();

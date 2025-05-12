@@ -2,56 +2,9 @@
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
-
-// TEMPorary USER ID 
-//set this manually while youre not logged in
-$userID = 1; // CHANGE THIS to your user id
-
-//Function to delete user
-function deleteUser($conn, $deleteID) {
-    //Delete from dependent tables first
-    $tables = ['albumbadge', 'payment', 'playlist'];
-    foreach ($tables as $table) {
-        $stmt = $conn->prepare("DELETE FROM $table WHERE userID = ?");
-        if (!$stmt) {
-            echo "<p style='color:red;'>Error preparing DELETE from $table</p>";
-            return false;
-        }
-        $stmt->bind_param("i", $deleteID);
-        $stmt->execute();
-        $stmt->close();
-    }
-
-    
-    $stmt = $conn->prepare("DELETE FROM user WHERE userID = ?");
-    if (!$stmt) {
-        echo "<p style='color:red;'>Error preparing DELETE from user</p>";
-        return false;
-    }
-    $stmt->bind_param("i", $deleteID);
-    $stmt->execute();
-    $stmt->close();
-    return true;
-}
-
-
-
-if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    $deleteID = (int) $_GET['delete'];
-
-    if ($deleteID == $userID) {
-        echo "<p style='color:red;'>You cannot delete yourself.</p>";
-    } else {
-        if (deleteUser($conn, $deleteID)) {
-            // Redirect to avoid resubmission
-            header("Location: admin.php");
-            exit();
-        } else {
-            echo "<p style='color:red;'>Failed to delete user.</p>";
-        }
-    }
-}
+include 'includes/functions.php';
 ?>
+
 
 <div class="section" style="padding: 20px;">
     <h2>Admin Panel - Manage Users</h2>

@@ -1,6 +1,4 @@
 <?php
-// login.php
-
 // 1) Autoload Composer packages (Dotenv + Google Client)
 require_once __DIR__ . '/vendor/autoload.php';
 

@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (empty($_SESSION['userID'])) {
+  header('Location: login.php');
+  exit();
+}
+
 include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
@@ -31,7 +36,7 @@ $product = mysqli_fetch_assoc($query);
   <button class="purchase-btn">Buy Now</button>
 </div>
 
-</div> <!-- .main-content -->
-</div> <!-- .wrapper -->
+</div> 
+</div> 
 </body>
 </html>
