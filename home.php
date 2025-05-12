@@ -5,7 +5,7 @@ include 'includes/dbh.php';
 include 'includes/header.php'; 
 include 'includes/topbar.php';
 
-$userID = $_SESSION['userid'] ?? null;
+$userID = $_SESSION['userID'] ?? null;
 ?>
 
 <div class="homepage">

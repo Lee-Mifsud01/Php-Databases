@@ -31,7 +31,7 @@ $product = mysqli_fetch_assoc($query);
   <button class="purchase-btn">Buy Now</button>
 </div>
 
-</div> <!-- .main-content -->
-</div> <!-- .wrapper -->
+</div> 
+</div> 
 </body>
 </html>

@@ -10,7 +10,7 @@ include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
-$userID = intval($_SESSION['userid']);
+$userID = intval($_SESSION['userID']);
 ?>
 
 <div class="homepage">
