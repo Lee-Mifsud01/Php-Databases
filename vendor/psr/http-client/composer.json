@@ -2,12 +2,12 @@
     "name": "psr/http-client",
     "description": "Common interface for HTTP clients",
     "keywords": ["psr", "psr-18", "http", "http-client"],
-    "homepage": "https://github.com/php-fig/http-client",
+    "indexpage": "https://github.com/php-fig/http-client",
     "license": "MIT",
     "authors": [
         {
             "name": "PHP-FIG",
-            "homepage": "https://www.php-fig.org/"
+            "indexpage": "https://www.php-fig.org/"
         }
     ],
     "support": {

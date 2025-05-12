@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Symfony polyfill for ctype functions",
     "keywords": ["polyfill", "compatibility", "portable", "ctype"],
-    "homepage": "https://symfony.com",
+    "indexpage": "https://symfony.com",
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
         },
         {
             "name": "Symfony Community",
-            "homepage": "https://symfony.com/contributors"
+            "indexpage": "https://symfony.com/contributors"
         }
     ],
     "require": {

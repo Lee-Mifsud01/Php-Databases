@@ -58,7 +58,7 @@
                 }
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
-            "homepage": "https://github.com/firebase/php-jwt",
+            "indexpage": "https://github.com/firebase/php-jwt",
             "keywords": [
                 "jwt",
                 "php"
@@ -128,7 +128,7 @@
                 "Apache-2.0"
             ],
             "description": "Client library for Google APIs",
-            "homepage": "http://developers.google.com/api-client-library/php",
+            "indexpage": "http://developers.google.com/api-client-library/php",
             "keywords": [
                 "google"
             ],
@@ -172,7 +172,7 @@
                 "Apache-2.0"
             ],
             "description": "Client library for Google APIs",
-            "homepage": "http://developers.google.com/api-client-library/php",
+            "indexpage": "http://developers.google.com/api-client-library/php",
             "keywords": [
                 "google"
             ],
@@ -230,7 +230,7 @@
                 "Apache-2.0"
             ],
             "description": "Google Auth Library for PHP",
-            "homepage": "https://github.com/google/google-auth-library-php",
+            "indexpage": "https://github.com/google/google-auth-library-php",
             "keywords": [
                 "Authentication",
                 "google",
@@ -278,7 +278,7 @@
                 {
                     "name": "Graham Campbell",
                     "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
+                    "indexpage": "https://github.com/GrahamCampbell"
                 }
             ],
             "description": "An Implementation Of The Result Type",
@@ -366,37 +366,37 @@
                 {
                     "name": "Graham Campbell",
                     "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
+                    "indexpage": "https://github.com/GrahamCampbell"
                 },
                 {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
+                    "indexpage": "https://github.com/mtdowling"
                 },
                 {
                     "name": "Jeremy Lindblom",
                     "email": "jeremeamia@gmail.com",
-                    "homepage": "https://github.com/jeremeamia"
+                    "indexpage": "https://github.com/jeremeamia"
                 },
                 {
                     "name": "George Mponos",
                     "email": "gmponos@gmail.com",
-                    "homepage": "https://github.com/gmponos"
+                    "indexpage": "https://github.com/gmponos"
                 },
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "indexpage": "https://github.com/Nyholm"
                 },
                 {
                     "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://github.com/sagikazarmark"
+                    "indexpage": "https://github.com/sagikazarmark"
                 },
                 {
                     "name": "Tobias Schultze",
                     "email": "webmaster@tubo-world.de",
-                    "homepage": "https://github.com/Tobion"
+                    "indexpage": "https://github.com/Tobion"
                 }
             ],
             "description": "Guzzle is a PHP HTTP client library",
@@ -472,22 +472,22 @@
                 {
                     "name": "Graham Campbell",
                     "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
+                    "indexpage": "https://github.com/GrahamCampbell"
                 },
                 {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
+                    "indexpage": "https://github.com/mtdowling"
                 },
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "indexpage": "https://github.com/Nyholm"
                 },
                 {
                     "name": "Tobias Schultze",
                     "email": "webmaster@tubo-world.de",
-                    "homepage": "https://github.com/Tobion"
+                    "indexpage": "https://github.com/Tobion"
                 }
             ],
             "description": "Guzzle promises library",
@@ -566,37 +566,37 @@
                 {
                     "name": "Graham Campbell",
                     "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
+                    "indexpage": "https://github.com/GrahamCampbell"
                 },
                 {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
+                    "indexpage": "https://github.com/mtdowling"
                 },
                 {
                     "name": "George Mponos",
                     "email": "gmponos@gmail.com",
-                    "homepage": "https://github.com/gmponos"
+                    "indexpage": "https://github.com/gmponos"
                 },
                 {
                     "name": "Tobias Nyholm",
                     "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
+                    "indexpage": "https://github.com/Nyholm"
                 },
                 {
                     "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://github.com/sagikazarmark"
+                    "indexpage": "https://github.com/sagikazarmark"
                 },
                 {
                     "name": "Tobias Schultze",
                     "email": "webmaster@tubo-world.de",
-                    "homepage": "https://github.com/Tobion"
+                    "indexpage": "https://github.com/Tobion"
                 },
                 {
                     "name": "Márk Sági-Kazár",
                     "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://sagikazarmark.hu"
+                    "indexpage": "https://sagikazarmark.hu"
                 }
             ],
             "description": "PSR-7 message implementation that also provides common utility methods",
@@ -707,11 +707,11 @@
                 {
                     "name": "Jordi Boggiano",
                     "email": "j.boggiano@seld.be",
-                    "homepage": "https://seld.be"
+                    "indexpage": "https://seld.be"
                 }
             ],
             "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
-            "homepage": "https://github.com/Seldaek/monolog",
+            "indexpage": "https://github.com/Seldaek/monolog",
             "keywords": [
                 "log",
                 "logging",
@@ -768,13 +768,13 @@
                 {
                     "name": "Paragon Initiative Enterprises",
                     "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com",
+                    "indexpage": "https://paragonie.com",
                     "role": "Maintainer"
                 },
                 {
                     "name": "Steve 'Sc00bz' Thomas",
                     "email": "steve@tobtu.com",
-                    "homepage": "https://www.tobtu.com",
+                    "indexpage": "https://www.tobtu.com",
                     "role": "Original Developer"
                 }
             ],
@@ -833,7 +833,7 @@
                 {
                     "name": "Paragon Initiative Enterprises",
                     "email": "security@paragonie.com",
-                    "homepage": "https://paragonie.com"
+                    "indexpage": "https://paragonie.com"
                 }
             ],
             "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
@@ -894,12 +894,12 @@
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh"
+                    "indexpage": "https://github.com/schmittjoh"
                 },
                 {
                     "name": "Graham Campbell",
                     "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
+                    "indexpage": "https://github.com/GrahamCampbell"
                 }
             ],
             "description": "Option Type for PHP",
@@ -995,7 +995,7 @@
                 }
             ],
             "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
-            "homepage": "http://phpseclib.sourceforge.net",
+            "indexpage": "http://phpseclib.sourceforge.net",
             "keywords": [
                 "BigInteger",
                 "aes",
@@ -1070,7 +1070,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "indexpage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for caching libraries",
@@ -1120,11 +1120,11 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "indexpage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP clients",
-            "homepage": "https://github.com/php-fig/http-client",
+            "indexpage": "https://github.com/php-fig/http-client",
             "keywords": [
                 "http",
                 "http-client",
@@ -1172,7 +1172,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "indexpage": "https://www.php-fig.org/"
                 }
             ],
             "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
@@ -1226,11 +1226,11 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "indexpage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
-            "homepage": "https://github.com/php-fig/http-message",
+            "indexpage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -1279,11 +1279,11 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "indexpage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
+            "indexpage": "https://github.com/php-fig/log",
             "keywords": [
                 "log",
                 "psr",
@@ -1381,11 +1381,11 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
+                    "indexpage": "https://symfony.com/contributors"
                 }
             ],
             "description": "A generic function and convention to trigger deprecation notices",
-            "homepage": "https://symfony.com",
+            "indexpage": "https://symfony.com",
             "support": {
                 "source": "https://github.com/symfony/deprecation-contracts/tree/v3.5.1"
             },
@@ -1454,11 +1454,11 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
+                    "indexpage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
-            "homepage": "https://symfony.com",
+            "indexpage": "https://symfony.com",
             "keywords": [
                 "compatibility",
                 "ctype",
@@ -1534,11 +1534,11 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
+                    "indexpage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony polyfill for the Mbstring extension",
-            "homepage": "https://symfony.com",
+            "indexpage": "https://symfony.com",
             "keywords": [
                 "compatibility",
                 "mbstring",
@@ -1615,11 +1615,11 @@
                 },
                 {
                     "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
+                    "indexpage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony polyfill backporting some PHP 8.0+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
+            "indexpage": "https://symfony.com",
             "keywords": [
                 "compatibility",
                 "polyfill",
@@ -1699,12 +1699,12 @@
                 {
                     "name": "Graham Campbell",
                     "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
+                    "indexpage": "https://github.com/GrahamCampbell"
                 },
                 {
                     "name": "Vance Lucas",
                     "email": "vance@vancelucas.com",
-                    "homepage": "https://github.com/vlucas"
+                    "indexpage": "https://github.com/vlucas"
                 }
             ],
             "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",

@@ -13,7 +13,7 @@ include 'includes/topbar.php';
 $userID = $_SESSION['userID'] ?? null;
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <!-- SECTION: Featured Artists -->
   <section class="section">
     <h2>Featured Artists</h2>

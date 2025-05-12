@@ -34,7 +34,7 @@ if (mysqli_num_rows($albumQuery) === 0) {
 $album = mysqli_fetch_assoc($albumQuery);
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <section class="section">
     <h2><?php echo htmlspecialchars($album['album_title']); ?></h2>
     <p>By <a href="artist.php?id=<?php echo $album['artistID']; ?>" class="card-title-link">

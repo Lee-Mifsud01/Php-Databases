@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Client library for Google APIs",
     "keywords": ["google"],
-    "homepage": "http://developers.google.com/api-client-library/php",
+    "indexpage": "http://developers.google.com/api-client-library/php",
     "license": "Apache-2.0",
     "require": {
         "php": "^8.0"

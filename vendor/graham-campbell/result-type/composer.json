@@ -7,7 +7,7 @@
         {
             "name": "Graham Campbell",
             "email": "hello@gjcampbell.co.uk",
-            "homepage": "https://github.com/GrahamCampbell"
+            "indexpage": "https://github.com/GrahamCampbell"
         }
     ],
     "require": {

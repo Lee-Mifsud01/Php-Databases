@@ -143,7 +143,7 @@ final class Utils
             '/usr/local/share/certs/ca-root-nss.crt',
             // SLES 12 (provided by the ca-certificates package)
             '/var/lib/ca-certificates/ca-bundle.pem',
-            // OS X provided by homebrew (using the default path)
+            // OS X provided by indexbrew (using the default path)
             '/usr/local/etc/openssl/cert.pem',
             // Google app engine
             '/etc/ca-certificates.crt',

@@ -12,7 +12,7 @@ include 'includes/topbar.php';
 $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <section class="section">
     <h2>Search results for "<?= htmlspecialchars($searchTerm) ?>"</h2>
 

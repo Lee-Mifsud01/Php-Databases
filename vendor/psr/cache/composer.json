@@ -6,7 +6,7 @@
     "authors": [
         {
             "name": "PHP-FIG",
-            "homepage": "https://www.php-fig.org/"
+            "indexpage": "https://www.php-fig.org/"
         }
     ],
     "require": {

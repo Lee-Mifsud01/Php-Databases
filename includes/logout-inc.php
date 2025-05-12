@@ -6,7 +6,7 @@ session_start();
 session_unset();
 session_destroy();
 
-header("location: ../home.php");
+header("location: ../index.php");
 echo "Redirecting .......";
 exit();
 

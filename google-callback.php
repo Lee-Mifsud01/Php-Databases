@@ -66,6 +66,6 @@ if ($found) {
     $insert->close();
 }
 
-// 9) Redirect back to your homepage (or account page)
-header('Location: ../home.php');
+// 9) Redirect back to your indexpage (or account page)
+header('Location: index.php');
 exit;

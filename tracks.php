@@ -10,7 +10,7 @@ include 'includes/header.php';
 include 'includes/topbar.php';
 ?>
 
-<div class="homepage">
+<div class="indexpage">
   <section class="section">
     <h2>Recently Added Tracks</h2>
     <div class="list">
