@@ -16,7 +16,7 @@ $spotifyArtist = null;
 
 // Step 3: If we have a local artist, use Spotify API
 if ($localArtistName) {
-    $accessToken = "BQBQQaWygKrylu7gMsp0eRk4n6cQTaa5Nf_VQws9WwWw9QmkXNDCbCT-6j1cE2wzgGFuDu6W7d7zuA5RIW7IVCNzvotScO-drziP9qiygydMazxAgH0kars6fMebzvJPrxKC1EaADLg7kcrzdUYeUBhks_95VV8x7q3BTUwlaqyJAUYjmzDSnnmygDzEsTyx3thWQUyu_WTJjNJNdSH26IcpKIKh3NpDE6vdF_Za0Tk";// Replace this with your valid token
+    $accessToken = "BQDigXEqHXDujJoMfEQ4UtCElJBkijYvMzSCsPmELfVVD7OmKkODB3Bo6czGo2HPikDNfz_GkcBths-59v6yq2u7u0R7889JkmiN10v6fEDkxjF93DgmjnIkFVFJST_xMP0_wpJxN0veu62kFySTMGN-cYvpG6KSpF0Xx0vluUlEj7TE11J8RFtH0WXBEPkhAHH2Ij_qNFYvI0iYELXovhbYS_XzJVdoGflGJYx4a9HOlgvMTg4RHYyLjr4";// Replace this with your valid token
 
     $query = urlencode($localArtistName);
     $url = "https://api.spotify.com/v1/search?q={$query}&type=artist&limit=1";
@@ -54,7 +54,7 @@ if ($localArtistName) {
   <?php endif; ?>
 </div>
 
-</div> <!-- .main-content -->
-</div> <!-- .wrapper -->
+</div> 
+</div> 
 </body>
 </html>

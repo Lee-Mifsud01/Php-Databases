@@ -3,8 +3,8 @@
 session_start();
 
 // TEMP: manually simulate login
-if (!isset($_SESSION['userid'])) {
-  $_SESSION['userid'] = 2; // use a real userID from your database
+if (!isset($_SESSION['userID'])) {
+  $_SESSION['userID'] = 2; // use a real userID from your database
 }
 include 'includes/dbh.php';
 include 'includes/header.php';

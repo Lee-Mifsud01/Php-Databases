@@ -5,7 +5,7 @@ include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
-$userID = $_SESSION['userid'];
+$userID = $_SESSION['userID'];
 
 // Get the user's current subscription ID
 $userSubQuery = mysqli_query($conn, "SELECT subscriptionID FROM user WHERE userID = $userID");
