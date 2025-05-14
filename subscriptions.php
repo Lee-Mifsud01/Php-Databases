@@ -36,24 +36,33 @@ $subsQuery = mysqli_query($conn, "SELECT subscriptionID, name, price, descriptio
     }
     ?>
 
-    <div class="grid">
+    <div class="grid subscriptions">
       <?php
       if (mysqli_num_rows($subsQuery) > 0) {
         while ($sub = mysqli_fetch_assoc($subsQuery)) {
           $isCurrent = ($sub['subscriptionID'] == $currentSubID);
+          $icon = match ($sub['name']) {
+            'Free' => '🎧',
+            'Plus' => '🎵',
+            'Premium' => '🚀',
+            default => '💽',
+          };
+
           echo '<div class="card">';
-          echo '<h3>' . htmlspecialchars($sub['name']) . '</h3>';
+          echo '<h3>' . $icon . ' ' . htmlspecialchars($sub['name']) . '</h3>';
           echo '<p><strong>Price:</strong> €' . number_format($sub['price'], 2) . '</p>';
           echo '<p><strong>Type:</strong> ' . htmlspecialchars($sub['subscriptionType']) . '</p>';
           echo '<p>' . nl2br(htmlspecialchars($sub['description'])) . '</p>';
 
           if ($isCurrent) {
-            echo '<button class="current-btn" disabled>✔ Active Plan</button>';
+            // Show current plan and cancel form
             echo '<form method="POST" action="cancel_subscription.php">';
+            echo '<button type="submit" class="current-btn" disabled>✔ Active Plan</button>';
             echo '<button type="submit" class="cancel-btn">Cancel</button>';
             echo '</form>';
           } else {
-            echo '<form method="POST" action="purchase_subscription.php">';
+            // Show purchase form
+            echo '<form method="POST" action="payment.php">';
             echo '<input type="hidden" name="subscriptionID" value="' . htmlspecialchars($sub['subscriptionID']) . '">';
             echo '<button type="submit" class="purchase-btn">Purchase</button>';
             echo '</form>';

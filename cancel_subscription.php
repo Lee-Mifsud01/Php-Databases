@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (empty($_SESSION['userID'])) {
   header('Location: login.php');
   exit();
@@ -9,14 +8,14 @@ if (empty($_SESSION['userID'])) {
 include 'includes/dbh.php';
 
 $userID = intval($_SESSION['userID']);
+$cancel = mysqli_prepare($conn, "UPDATE user SET subscriptionID = NULL WHERE userID = ?");
+mysqli_stmt_bind_param($cancel, "i", $userID);
 
-$cancelQuery = "UPDATE user SET subscriptionID = NULL WHERE userID = $userID";
-
-if (mysqli_query($conn, $cancelQuery)) {
-  header('Location: subscriptions.php?success=cancelled');
+if (mysqli_stmt_execute($cancel)) {
+  header("Location: subscriptions.php?success=cancelled");
   exit();
 } else {
-  header('Location: subscriptions.php?error=cancelfail');
+  header("Location: subscriptions.php?error=cancelfail");
   exit();
 }
 ?>
