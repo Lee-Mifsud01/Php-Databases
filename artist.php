@@ -16,8 +16,7 @@ $spotifyArtist = null;
 
 // Step 3: If we have a local artist, use Spotify API
 if ($localArtistName) {
-    $accessToken = "BQAsAzieSNi9WlPUvm1ZWmqZu_0eNAiSrqs3hwVITvw6d88QoVOyiWH55_aRQGecEUkT77YhG-WuyxRsWcRq_Q9-q0G-qvV7_2dGyMWI8Kz_1QMRj2le2S3qn3ODq8HAX1eH2l7_ejjbhVJlyqWxpAcTc3DtUSjn7qMq3xgVuPtzPanJyB2Sef0GPzjkc0RtyMBN46OrgvDnVa2G-VWuud_6FaZadOm53yMKtaamX9vp0l5EUmXcJwVTnjc";// Replace this with your valid token
-
+    $accessToken = "BQB3l98QkIdPKn07ITuitBFbk7Rq_17XPPQ89sWM7OcXlIAIGj1oK0cxaXtAXFgxly734B6jXScuulZhvhY0BL-Rho9Swtedn8qKtDoFerqD2j3RwYaVTgziOhXDkYRTHh0lAHaPwwl1dLVBGHZ1NY_6RKNSO7Rp_9q4Gw4ktmg7lUuOBkVolge6L0SOZjRDIXJwIm7shEQCq8SXsIMw2yAp1jZTyAuCfUEeVZpuGyWF-FLy5CsvHjoTuu8"; // Replace with fresh token
     $query = urlencode($localArtistName);
     $url = "https://api.spotify.com/v1/search?q={$query}&type=artist&limit=1";
 
@@ -49,12 +48,75 @@ if ($localArtistName) {
       <p>Spotify data not available.</p>
     <?php endif; ?>
 
+    <hr>
+    <h3>Merchandise</h3>
+    <div class="grid">
+      <?php
+      $sql = "
+        SELECT 
+          p.productID, p.name, p.price, p.description,
+          w.material AS wearableMaterial, w.size AS wearableSize,
+          v.size AS vinylSize, v.edition AS vinylEdition,
+          c.size AS cdSize, c.edition AS cdEdition,
+          o.size AS otherSize, o.material AS otherMaterial, o.edition AS otherEdition
+        FROM product p
+        JOIN producttype pt ON p.productTypeID = pt.productTypeID
+        LEFT JOIN wearable w ON pt.wearableID = w.wearableID
+        LEFT JOIN vinyl v ON pt.vinylID = v.vinylID
+        LEFT JOIN cd c ON pt.cdID = c.cdID
+        LEFT JOIN otherproduct o ON pt.otherProductID = o.otherProductID
+        WHERE p.artistID = $artistID
+      ";
+
+      $result = mysqli_query($conn, $sql);
+
+      if ($result && mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+          echo '<div class="card">';
+          echo '<div class="card-img">🛍️</div>';
+          echo '<h4>' . htmlspecialchars($row['name'] ?? 'Unnamed Product') . '</h4>';
+          echo '<p><strong>$' . number_format($row['price'], 2) . '</strong></p>';
+          echo '<p>' . nl2br(htmlspecialchars($row['description'] ?? '')) . '</p>';
+
+          // Wearable
+          if (!empty($row['wearableMaterial']) || !empty($row['wearableSize'])) {
+            echo '<p><strong>Material:</strong> ' . htmlspecialchars($row['wearableMaterial']) . '</p>';
+            echo '<p><strong>Size:</strong> ' . htmlspecialchars($row['wearableSize']) . '</p>';
+          }
+
+          // Vinyl
+          if (!empty($row['vinylSize']) || !empty($row['vinylEdition'])) {
+            echo '<p><strong>Vinyl Size:</strong> ' . htmlspecialchars($row['vinylSize']) . '</p>';
+            echo '<p><strong>Edition:</strong> ' . htmlspecialchars($row['vinylEdition']) . '</p>';
+          }
+
+          // CD
+          if (!empty($row['cdSize']) || !empty($row['cdEdition'])) {
+            echo '<p><strong>CD Size:</strong> ' . htmlspecialchars($row['cdSize']) . '</p>';
+            echo '<p><strong>Edition:</strong> ' . htmlspecialchars($row['cdEdition']) . '</p>';
+          }
+
+          // Other Product
+          if (!empty($row['otherMaterial']) || !empty($row['otherSize']) || !empty($row['otherEdition'])) {
+            echo '<p><strong>Material:</strong> ' . htmlspecialchars($row['otherMaterial']) . '</p>';
+            echo '<p><strong>Size:</strong> ' . htmlspecialchars($row['otherSize']) . '</p>';
+            echo '<p><strong>Edition:</strong> ' . htmlspecialchars($row['otherEdition']) . '</p>';
+          }
+
+          echo '<div class="card-buttons">';
+          echo '<a href="#" class="purchase-btn">Buy</a>';
+          echo '<a href="product.php?id=' . $row['productID'] . '" class="btn-more">More Info</a>';
+          echo '</div>';
+          echo '</div>'; // end card
+        }
+      } else {
+        echo '<p>No merchandise found for this artist.</p>';
+      }
+      ?>
+    </div>
   <?php else: ?>
     <p>Artist not found.</p>
   <?php endif; ?>
 </div>
-
-</div> 
-</div> 
 </body>
 </html>
