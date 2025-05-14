@@ -10,17 +10,46 @@ $userID = $_SESSION['userID'] ?? null;
 ?>
 
 <div class="indexpage">
+  
   <!-- SECTION: Featured Artists -->
   <section class="section">
     <h2>Featured Artists</h2>
     <div class="grid">
       <?php
+      $accessToken = "BQAkBLRh9R6eS2RdUZNTpcvqiNnYGwafJzfIjIPwizmBMhxxw0F8ntN3wBiwjbB99cGunUd2Aatov-Pkj5UKxWMuoYGk6q7xLZ7aF2KabwohcovDpZPMvQ4OFJYbJw5fXD4kZCXzRfvRU38PNPaocdJ2kCAG6whxbnTvT8mjlDj44k535PI8H-X0o8Yia30xw2KuARr0fRqM2x4drVja3GOgm5vq6yy4d_CLbfWdhEgL391RiXQXS9-t3QQ";
+
       $result = mysqli_query($conn, "SELECT artistID, name FROM artist LIMIT 6");
       if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
+          $artistID = $row['artistID'];
+          $artistName = $row['name'];
+          $imageUrl = null;
+
+          // Query Spotify API
+          $query = urlencode($artistName);
+          $url = "https://api.spotify.com/v1/search?q={$query}&type=artist&limit=1";
+
+          $ch = curl_init();
+          curl_setopt($ch, CURLOPT_URL, $url);
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer $accessToken"
+          ]);
+          $response = curl_exec($ch);
+          curl_close($ch);
+
+          $spotifyData = json_decode($response, true);
+          if (!empty($spotifyData['artists']['items'][0]['images'][0]['url'])) {
+            $imageUrl = $spotifyData['artists']['items'][0]['images'][0]['url'];
+          }
+
           echo '<div class="card">';
-          echo '<div class="card-img">🎤</div>';
-          echo '<p><a href="artist.php?id=' . $row['artistID'] . '" class="card-title-link">' . htmlspecialchars($row['name']) . '</a></p>';
+          if ($imageUrl) {
+            echo '<img src="' . htmlspecialchars($imageUrl) . '" alt="Artist image" class="card-img">';
+          } else {
+            echo '<div class="card-img">🎤</div>';
+          }
+          echo '<p><a href="artist.php?id=' . $artistID . '" class="card-title-link">' . htmlspecialchars($artistName) . '</a></p>';
           echo '</div>';
         }
       } else {
@@ -29,6 +58,7 @@ $userID = $_SESSION['userID'] ?? null;
       ?>
     </div>
   </section>
+
 
   <!-- SECTION: Trending Albums -->
   <section class="section">
