@@ -11,7 +11,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 // 2) Include your DB connection
-include __DIR__ . '/../includes/dbh.php';
+include __DIR__ . '/includes/dbh.php';
 
 // 3) Configure Google Client
 $client = new Google\Client();
@@ -48,7 +48,7 @@ $stmt->close();
 
 if ($found) {
     // 8a) Existing user: log them in
-    $_SESSION['userid'] = $userID;
+    $_SESSION['userID'] = $userID;
 } else {
     // 8b) New user: insert into DB
     $insert = $conn->prepare("
@@ -62,7 +62,7 @@ if ($found) {
         $userInfo->id
     );
     $insert->execute();
-    $_SESSION['userid'] = $insert->insert_id;
+    $_SESSION['userID'] = $insert->insert_id;
     $insert->close();
 }
 
