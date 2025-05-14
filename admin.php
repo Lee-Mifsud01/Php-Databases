@@ -24,7 +24,6 @@ if (!$row || $row['admin'] != 1) {
 
 include 'includes/header.php';
 include 'includes/topbar.php';
-include 'includes/functions.php';
 ?>
 
 <div class="section" style="padding: 20px;">
