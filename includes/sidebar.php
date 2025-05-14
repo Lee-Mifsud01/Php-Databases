@@ -19,12 +19,15 @@ if ($userID) {
 <aside class="sidebar">
   <div class="sidebar-top">
   <a href="index.php" class="circle-btn index-btn" title="index">
-  <img src="images/MyTunesLogo.png" alt="index">
+  <img id="MyTunes-logo" src="images/MyTunes-logo.png" alt="MyTunes logo">
 </a>
     <form class="search-bar" method="GET" action="/php-databases/search.php">
-      <input type="text" name="q" placeholder="Search albums or tracks..." required />
-      <button type="submit">🔍</button>
+      <div class="search-wrapper">
+        <input type="text" name="q" placeholder="Search albums or tracks..." required />
+        <button type="submit"><img class="icons" src="images/search-icon.png" alt="Search"></button>
+      </div>
     </form>
+
 
     <?php if ($isAdmin): ?>
       <a href="admin.php" class="admin-button">Admin Panel</a>

@@ -69,9 +69,9 @@ if ($userID) {
 <div class="topbar">
   <!-- Left controls -->
   <div class="topbar-left">
-    <button class="circle-btn" aria-label="Previous track">⏮</button>
-    <button class="circle-btn" aria-label="Play/Pause">⏯</button>
-    <button class="circle-btn" aria-label="Next track">⏭</button>
+    <button class="circle-btn"  aria-label="Previous track"><img class="topbtns" src="images/previous-track.webp" alt="previous track icon"></button>
+    <button class="circle-btn"  aria-label="Play/Pause"><img class="topbtns" src="images/playicon.png" alt="play track icon"></button>
+    <button class="circle-btn"  aria-label="Next track"><img   src="images/next-track.png" alt="next track icon"></button>
   </div>
 
   <!-- Center: currently playing -->
@@ -91,7 +91,7 @@ if ($userID) {
 
   <!-- Right: volume + profile -->
   <div class="topbar-right">
-    <input type="range" min="0" max="100" value="70" aria-label="Volume">
+    <input type="range" min="0" max="100" value="70" aria-label="Volume" id="slider">
 
     <div class="profile-dropdown" tabindex="0" aria-haspopup="true">
       <button class="circle-btn avatar-btn" aria-label="User menu">

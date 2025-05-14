@@ -101,7 +101,7 @@ $user = mysqli_fetch_assoc($userQuery);
       <button type="submit">Update</button>
     </form>
 
-    <h3>🖼️ Change Profile Picture</h3>
+    <h3>Change Profile Picture</h3>
     <form method="POST" enctype="multipart/form-data">
       <input type="file" name="avatar" accept="image/png, image/jpeg" required>
       <button type="submit">Upload</button>
@@ -113,7 +113,7 @@ $user = mysqli_fetch_assoc($userQuery);
   </section>
 
   <section class="section">
-    <h3>🏅 Badges</h3>
+    <h3>Badges</h3>
     <?php
     $badgeQuery = mysqli_query($conn, "
       SELECT ab.pressingID, a.title AS album_title

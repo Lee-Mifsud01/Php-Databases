@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
 
@@ -43,14 +46,17 @@ $userID = $_SESSION['userID'] ?? null;
             $imageUrl = $spotifyData['artists']['items'][0]['images'][0]['url'];
           }
 
+          echo '<a href="artist.php?id=' . $artistID . '" class="card-link">';
           echo '<div class="card">';
           if ($imageUrl) {
-            echo '<img src="' . htmlspecialchars($imageUrl) . '" alt="Artist image" class="card-img">';
+            echo '<img src="' . htmlspecialchars($imageUrl) . '" alt="Artist image" class="card-img circle">';
           } else {
-            echo '<div class="card-img">🎤</div>';
+            echo '<div class="card-img placeholder-shimmer circle"></div>';
           }
-          echo '<p><a href="artist.php?id=' . $artistID . '" class="card-title-link">' . htmlspecialchars($artistName) . '</a></p>';
+          echo '<p class="card-title-link">' . htmlspecialchars($artistName) . '</p>';
           echo '</div>';
+          echo '</a>';
+
         }
       } else {
         echo '<p>No artists found.</p>';
@@ -60,18 +66,34 @@ $userID = $_SESSION['userID'] ?? null;
   </section>
 
 
-  <!-- SECTION: Trending Albums -->
+ <!-- SECTION: Trending Albums -->
   <section class="section">
     <h2>Trending Albums</h2>
     <div class="grid">
       <?php
-      $result = mysqli_query($conn, "SELECT albumID, title FROM album LIMIT 6");
+      $query = "
+        SELECT a.albumID, a.title, i.url
+        FROM album a
+        LEFT JOIN entityimages ei ON ei.albumID = a.albumID
+        LEFT JOIN image i ON ei.imageID = i.imageID
+        LIMIT 6
+      ";
+
+      $result = mysqli_query($conn, $query);
+
       if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
           echo '<a href="album.php?id=' . $row['albumID'] . '" class="card-link">';
           echo '<div class="card">';
-          echo '<div class="card-img">💿</div>';
-          echo '<p>' . htmlspecialchars($row['title']) . '</p>';
+          
+          if (!empty($row['url'])) {
+            echo '<img src="' . htmlspecialchars($row['url']) . '" alt="Album cover" class="card-img">';
+          } else {
+            echo '<div class="card-img placeholder-shimmer"></div>';
+
+          }
+
+          echo '<p class="card-title-link">' . htmlspecialchars($row['title']) . '</p>';
           echo '</div>';
           echo '</a>';
         }
@@ -82,10 +104,13 @@ $userID = $_SESSION['userID'] ?? null;
     </div>
   </section>
 
+
+
+
   <!-- SECTION: Recently Added Tracks -->
   <section class="section">
     <h2>Recently Added Tracks</h2>
-    <div class="list">
+    <div class="list track-list">
       <?php
       $result = mysqli_query($conn, "
         SELECT t.title AS track_title, a.title AS album_title
@@ -95,9 +120,15 @@ $userID = $_SESSION['userID'] ?? null;
       ");
       if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
-          echo '<div class="list-item">';
-          echo '<strong>' . htmlspecialchars($row['track_title']) . '</strong>';
-          echo ' from <em>' . htmlspecialchars($row['album_title']) . '</em>';
+          echo '<div class="track-btn">';
+          echo '  <div class="track-info">';
+          echo '    <strong>' . htmlspecialchars($row['track_title']) . '</strong>';
+          echo '    <span>from <em>' . htmlspecialchars($row['album_title']) . '</em></span>';
+          echo '  </div>';
+          echo '  <div class="track-actions">';
+          echo '    <img src="images/like-icon.png" alt="Like" class="icon">';
+          echo '    <img src="images/queue-icon.png" alt="Queue" class="icon">';
+          echo '  </div>';
           echo '</div>';
         }
       } else {
@@ -106,9 +137,13 @@ $userID = $_SESSION['userID'] ?? null;
       ?>
     </div>
   </section>
+
+
 </div>
 
 </div> 
 </div> 
+
+
 </body>
 </html>

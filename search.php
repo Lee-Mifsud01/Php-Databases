@@ -18,7 +18,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
 
     <?php if ($searchTerm): ?>
 
-      <h3>🎵 Tracks</h3>
+      <h3>Tracks</h3>
       <div class="list">
         <?php
         $trackResult = mysqli_query($conn, "
@@ -41,7 +41,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
         ?>
       </div>
 
-      <h3>💿 Albums</h3>
+      <h3>Albums</h3>
       <div class="grid">
         <?php
         $albumResult = mysqli_query($conn, "
@@ -57,7 +57,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
           while ($album = mysqli_fetch_assoc($albumResult)) {
             echo '<a href="album.php?id=' . $album['albumID'] . '" class="card-link">';
             echo '<div class="card">';
-            echo '<div class="card-img">💿</div>';
+            echo '<div class="card-img"></div>';
             echo '<p>' . htmlspecialchars($album['title']) . '</p>';
             echo '</div></a>';
           }

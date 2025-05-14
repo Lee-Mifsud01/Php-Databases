@@ -37,7 +37,7 @@ $stmt->close();
 
 <div class="homepage">
   <section class="section">
-    <h2>👤 Account</h2>
+    <h2>Account</h2>
     <div class="list">
       <div class="list-item">
         <strong>Username:</strong>

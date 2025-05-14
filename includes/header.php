@@ -12,6 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Futura&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="wrapper">
     <?php include 'sidebar.php'; ?>
