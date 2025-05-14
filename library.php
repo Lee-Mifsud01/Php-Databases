@@ -28,7 +28,6 @@ $userID = intval($_SESSION['userID']);
 
       if (mysqli_num_rows($result) > 0) {
         while ($playlist = mysqli_fetch_assoc($result)) {
-          echo '<a href="playlist.php?id=' . $playlist['playlistID'] . '" class="card-link">';
           echo '  <div class="card">';
           echo '    <div class="card-img">🎵</div>';
           echo '    <p>' . htmlspecialchars($playlist['name']) . '</p>';
