@@ -16,7 +16,7 @@ $spotifyArtist = null;
 
 // Step 3: If we have a local artist, use Spotify API
 if ($localArtistName) {
-    $accessToken = "BQCgvghutlLbKEwFg9fYa7BsIwJkjKfDsxV1bMxowvwhNC_cCA90tbfKqB0YResQx1ZbHT2GCRgt48ogqKqGddGbwOlnafrDS22MOBs7FM_UUQNsmCmPqmuXhi2gT8Q3xwuLAjIK7IK5aEQ73l5nwfpc-XCI-4csQye4_KOK-1Y9d8YwmQdAMCmjVn4YwalJ3Mb30qnIME3HXhxpeRc2zW2DeMAFMKdGtkeHtVSQHiHfJHbULs_og5l2wog";// Replace this with your valid token
+    $accessToken = "BQAsAzieSNi9WlPUvm1ZWmqZu_0eNAiSrqs3hwVITvw6d88QoVOyiWH55_aRQGecEUkT77YhG-WuyxRsWcRq_Q9-q0G-qvV7_2dGyMWI8Kz_1QMRj2le2S3qn3ODq8HAX1eH2l7_ejjbhVJlyqWxpAcTc3DtUSjn7qMq3xgVuPtzPanJyB2Sef0GPzjkc0RtyMBN46OrgvDnVa2G-VWuud_6FaZadOm53yMKtaamX9vp0l5EUmXcJwVTnjc";// Replace this with your valid token
 
     $query = urlencode($localArtistName);
     $url = "https://api.spotify.com/v1/search?q={$query}&type=artist&limit=1";
