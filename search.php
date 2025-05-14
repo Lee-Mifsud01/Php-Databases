@@ -19,7 +19,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
     <?php if ($searchTerm): ?>
 
       <h3>Tracks</h3>
-      <div class="list">
+      <div class="list track-list">
         <?php
         $trackResult = mysqli_query($conn, "
           SELECT t.title AS track_title, a.title AS album_title
@@ -30,10 +30,17 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
 
         if (mysqli_num_rows($trackResult) > 0) {
           while ($row = mysqli_fetch_assoc($trackResult)) {
-            echo '<div class="list-item">';
-            echo '<strong>' . htmlspecialchars($row['track_title']) . '</strong>';
-            echo ' from <em>' . htmlspecialchars($row['album_title']) . '</em>';
+            echo '<div class="track-btn">';
+            echo '  <div class="track-info">';
+            echo '    <strong>' . htmlspecialchars($row['track_title']) . '</strong>';
+            echo '    <span>from <em>' . htmlspecialchars($row['album_title']) . '</em></span>';
+            echo '  </div>';
+            echo '  <div class="track-actions">';
+            echo '    <img src="images/like-icon.png" alt="Like" class="icon">';
+            echo '    <img src="images/queue-icon.png" alt="Queue" class="icon">';
+            echo '  </div>';
             echo '</div>';
+
           }
         } else {
           echo '<p>No tracks found.</p>';
