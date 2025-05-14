@@ -430,3 +430,61 @@ body.login-body {
   display: block !important;
 }
 
+/* ============================= */
+/* Subscription Cards Enhancements */
+/* ============================= */
+
+/* Price styling */
+.card p strong {
+  color: #ccc;
+}
+
+.card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Cancel button inside card */
+.cancel-btn {
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #b71c1c;
+}
+
+/* Active plan button */
+.current-btn {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  cursor: not-allowed;
+  width: 100%;
+}
+
+/* Grid adjustment to fit 3 plans nicely */
+.grid.subscriptions {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+/* Responsive card buttons spacing */
+.card form {
+  margin-top: 0.5rem;
+}
