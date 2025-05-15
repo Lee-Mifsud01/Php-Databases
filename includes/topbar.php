@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 //  Get the access token 
-$accessToken = "BQAkBLRh9R6eS2RdUZNTpcvqiNnYGwafJzfIjIPwizmBMhxxw0F8ntN3wBiwjbB99cGunUd2Aatov-Pkj5UKxWMuoYGk6q7xLZ7aF2KabwohcovDpZPMvQ4OFJYbJw5fXD4kZCXzRfvRU38PNPaocdJ2kCAG6whxbnTvT8mjlDj44k535PI8H-X0o8Yia30xw2KuARr0fRqM2x4drVja3GOgm5vq6yy4d_CLbfWdhEgL391RiXQXS9-t3QQ"; // Always replace with the currentaccess token
+$accessToken = "BQDiSVpFkDoXnO0QjMGwqiLvrXVvHO9VOyRkjkd4h8kJuD9Q4oNC8OhqruVam6lKYDgblEO9YPwArFMXxzRs50LSyIkFZfPy66UO0msY1CdlrHmr_aKxCn3ARWgG5x_jXEzU2U6wew527wxhmrOylVHdiq5j75lcnFaKpyL7jA2y5cXv9vjg4SZ2OdWWPSMMB8M5YFajd8qC1niuOSYtvnOcFsLVx2aPL9XHR1Le91JumtRHWCHK3j4u-G4"; // Always replace with the currentaccess token
 
 // Set up the Spotify API URL for the "currently playing" track
 $url = "https://api.spotify.com/v1/me/player/currently-playing";
