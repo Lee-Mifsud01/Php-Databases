@@ -16,12 +16,9 @@ include 'includes/topbar.php';
     <div class="list">
       <?php
       $query = mysqli_query($conn, "
-        SELECT t.title AS track_title,
-               t.trackID,
-               a.albumID,
-               a.title AS album_title,
-               ar.artistID,
-               ar.name AS artist_name
+        SELECT t.trackID, t.title AS track_title,
+               a.albumID, a.title AS album_title,
+               ar.artistID, ar.name AS artist_name
         FROM track t
         JOIN album a ON t.albumID = a.albumID
         JOIN artist ar ON a.artistID = ar.artistID
@@ -31,11 +28,38 @@ include 'includes/topbar.php';
 
       if (mysqli_num_rows($query) > 0) {
         while ($row = mysqli_fetch_assoc($query)) {
+          $trackID = $row['trackID'];
+
+          // Fetch featured artists for this track
+          $featureSQL = "
+            SELECT artist.name 
+            FROM feature
+            JOIN artist ON feature.artistID = artist.artistID
+            WHERE feature.trackID = ?
+          ";
+          $stmt = $conn->prepare($featureSQL);
+          $stmt->bind_param("i", $trackID);
+          $stmt->execute();
+          $featureResult = $stmt->get_result();
+
+          $featuredArtists = [];
+          while ($f = $featureResult->fetch_assoc()) {
+            $featuredArtists[] = htmlspecialchars($f['name']);
+          }
+
+          $featText = '';
+          if (!empty($featuredArtists)) {
+            $featText = ' <em>(feat. ' . implode(', ', $featuredArtists) . ')</em>';
+          }
+
+          // Output
           echo '<div class="list-item">';
-          echo '<strong>' . htmlspecialchars($row['track_title']) . '</strong>';
+          echo '<strong>' . htmlspecialchars($row['track_title']) . '</strong>' . $featText;
           echo ' from <a href="album.php?id=' . $row['albumID'] . '">' . htmlspecialchars($row['album_title']) . '</a>';
           echo ' by <a href="artist.php?id=' . $row['artistID'] . '">' . htmlspecialchars($row['artist_name']) . '</a>';
           echo '</div>';
+
+          $stmt->close();
         }
       } else {
         echo "<p>No tracks available.</p>";
@@ -45,7 +69,5 @@ include 'includes/topbar.php';
   </section>
 </div>
 
-</div> 
-</div> 
 </body>
 </html>

@@ -407,6 +407,12 @@ body.login-body {
   font-size: 1rem ;
 }
 
+.track-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 /* Generic circular buttons */
 .circle-btn {
   width: 40px;

@@ -113,27 +113,31 @@ $userID = $_SESSION['userID'] ?? null;
     <div class="list track-list">
       <?php
       $result = mysqli_query($conn, "
-        SELECT t.title AS track_title, a.title AS album_title
-        FROM track t
-        JOIN album a ON t.albumID = a.albumID
-        ORDER BY t.trackID DESC LIMIT 5
-      ");
-      if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-          echo '<div class="track-btn">';
-          echo '  <div class="track-info">';
-          echo '    <strong>' . htmlspecialchars($row['track_title']) . '</strong>';
-          echo '    <span>from <em>' . htmlspecialchars($row['album_title']) . '</em></span>';
-          echo '  </div>';
-          echo '  <div class="track-actions">';
-          echo '    <img src="images/like-icon.png" alt="Like" class="icon">';
-          echo '    <img src="images/queue-icon.png" alt="Queue" class="icon">';
-          echo '  </div>';
-          echo '</div>';
-        }
-      } else {
-        echo '<p>No tracks found.</p>';
+      SELECT t.trackID, t.title AS track_title, a.title AS album_title
+      FROM track t
+      JOIN album a ON t.albumID = a.albumID
+      ORDER BY t.trackID DESC LIMIT 5
+    ");
+    
+    if ($result && mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        echo '<a href="tracks.php?id=' . $row['trackID'] . '" class="track-link">';
+        echo '  <div class="track-btn">';
+        echo '    <div class="track-info">';
+        echo '      <strong>' . htmlspecialchars($row['track_title']) . '</strong>';
+        echo '      <span>from <em>' . htmlspecialchars($row['album_title']) . '</em></span>';
+        echo '    </div>';
+        echo '    <div class="track-actions">';
+        echo '      <img src="images/like-icon.png" alt="Like" class="icon">';
+        echo '      <img src="images/queue-icon.png" alt="Queue" class="icon">';
+        echo '    </div>';
+        echo '  </div>';
+        echo '</a>';
       }
+    } else {
+      echo '<p>No tracks found.</p>';
+    }
+    
       ?>
     </div>
   </section>
