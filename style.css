@@ -415,6 +415,9 @@ body.login-body {
   transform: scale(1.05);
 }
 
+.topbtns {
+  filter: brightness(0) invert(1);
+}
 
 
 .topbar-left,
