@@ -1,3 +1,4 @@
+ <!-- This page is not functional -->
 <?php
 session_start();
 if (empty($_SESSION['userID'])) {
@@ -69,3 +70,4 @@ if ($found) {
 // 9) Redirect back to your indexpage (or account page)
 header('Location: index.php');
 exit;
+

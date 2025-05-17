@@ -1,9 +1,11 @@
 <?php
 
-include 'includes/dbh.php';
-$userID = $_SESSION['userID'] ?? null;
-$isAdmin = false;
+//Sidebar loader & admin check
+include 'includes/dbh.php'; // Include the database connection
+$userID = $_SESSION['userID'] ?? null; // Get current user ID if logged in
+$isAdmin = false; // Default admin flag
 
+// If user is logged in, check if they are an admin
 if ($userID) {
   $stmt = $conn->prepare("SELECT admin FROM user WHERE userID = ?");
   $stmt->bind_param("i", $userID);
@@ -16,6 +18,7 @@ if ($userID) {
 }
 ?>
 
+<!-- Sidebar Navigation area -->
 <aside class="sidebar">
   <div class="sidebar-top">
   <a href="index.php" class="circle-btn index-btn" title="index">

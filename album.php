@@ -1,5 +1,7 @@
 <?php
+// Start the session to access the logged-in user's session data
 session_start();
+// Redirect to login if the user is not authenticated
 if (empty($_SESSION['userID'])) {
   header('Location: login.php');
   exit();
@@ -9,6 +11,7 @@ include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
+// Validate album ID from URL (GET param)
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
   echo "<p>Invalid album ID.</p>";
   exit();
@@ -16,7 +19,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $albumID = intval($_GET['id']);
 
-// Get album info + artist + cover image
+// Fetch album details, associated artist, and cover image
 $albumQuery = mysqli_query($conn, "
   SELECT a.title AS album_title, a.releaseDate, ar.artistID, ar.name AS artist_name, i.url AS image_url
   FROM album a
@@ -27,14 +30,16 @@ $albumQuery = mysqli_query($conn, "
   LIMIT 1
 ");
 
+// Handle case where album is not found
 if (mysqli_num_rows($albumQuery) === 0) {
   echo "<p>Album not found.</p>";
   exit();
 }
 
-$album = mysqli_fetch_assoc($albumQuery);
+$album = mysqli_fetch_assoc($albumQuery); // Store album data
 ?>
 
+<!--Album cover + metadata -->
 <div class="indexpage">
   <section class="section">
     <div style="display: flex; gap: 2rem; align-items: center;">
@@ -54,6 +59,7 @@ $album = mysqli_fetch_assoc($albumQuery);
     </div>
   </section>
 
+  <!--Tracklist display section-->
   <section class="section">
     <h3>Tracklist</h3>
     <div class="list track-list">
@@ -72,12 +78,14 @@ $album = mysqli_fetch_assoc($albumQuery);
           echo '<strong>' . $i++ . '. ' . htmlspecialchars($track['title']) . '</strong>';
           echo '</div>';
           echo '<div class="track-actions">';
+          // Icons for user interaction (like, queue)
           echo '<img src="images/like-icon.png" alt="like" class="icon">';
           echo '<img src="images/queue-icon.png" alt="queue" class="icon">';
           echo '</div>';
           echo '</div>';
         }
       } else {
+        // Icons for user interaction (like, queue)
         echo "<p>No tracks in this album yet.</p>";
       }
       ?>

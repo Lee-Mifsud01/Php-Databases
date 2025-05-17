@@ -1,12 +1,12 @@
 <?php
-// 1) Autoload Composer packages (Dotenv + Google Client)
+// Autoload Composer packages (Dotenv + Google Client)
 require_once __DIR__ . '/vendor/autoload.php';
 
-// 2) Load environment variables
+// Load environment variables
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-// 3) Configure Google Client
+//Configure Google Client
 $googleClient = new Google\Client();
 $googleClient->setClientId(   getenv('GOOGLE_CLIENT_ID')    );
 $googleClient->setClientSecret(getenv('GOOGLE_CLIENT_SECRET'));
@@ -14,7 +14,7 @@ $googleClient->setRedirectUri('http://localhost:8888/php-databases/google-callba
 $googleClient->addScope('email');
 $googleClient->addScope('profile');
 
-// 4) Generate the OAuth URL
+// Generate the OAuth URL
 $googleLoginUrl = $googleClient->createAuthUrl();
 ?>
 <!DOCTYPE html>

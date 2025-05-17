@@ -1,5 +1,7 @@
 <?php 
+// Profile Page: User Info + Badges
 session_start();
+// Redirect user if not logged in
 if (!isset($_SESSION['userID'])) {
   header("Location: login.php");
   exit();
@@ -9,6 +11,7 @@ include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
+// Get current user ID from session
 $userID = $_SESSION['userID'];
 
 // Handle profile picture upload
@@ -20,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar'])) {
     $newFileName = uniqid("pfp_", true) . "." . $ext;
     $uploadPath = "uploads/" . $newFileName;
 
+    // Move uploaded file to server
     if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+       // Get existing image info (if any)
       $stmt = $conn->prepare("SELECT u.imageID, i.url FROM user u LEFT JOIN image i ON u.imageID = i.imageID WHERE u.userID = ?");
       $stmt->bind_param("i", $userID);
       $stmt->execute();
@@ -28,21 +33,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar'])) {
       $stmt->fetch();
       $stmt->close();
 
+      // Save new image to `image` table
       $insert = $conn->prepare("INSERT INTO image (url) VALUES (?)");
       $insert->bind_param("s", $uploadPath);
       $insert->execute();
       $newImageID = $insert->insert_id;
       $insert->close();
 
+      // Update user with new image ID
       $update = $conn->prepare("UPDATE user SET imageID = ? WHERE userID = ?");
       $update->bind_param("ii", $newImageID, $userID);
       $update->execute();
       $update->close();
 
+      // Remove old profile picture (if it existed)
       if (!empty($oldUrl) && file_exists($oldUrl)) {
         unlink($oldUrl);
       }
 
+      // Redirect to refresh image and show success
       header("Location: profile.php?success=1");
       exit();
     }
@@ -72,7 +81,7 @@ if (!$userQuery || mysqli_num_rows($userQuery) === 0) {
 
 $user = mysqli_fetch_assoc($userQuery);
 ?>
-
+<!-- Profile View & Form -->
 <div class="indexpage">
   <section class="section">
     <h2>👤 Profile</h2>
@@ -82,6 +91,7 @@ $user = mysqli_fetch_assoc($userQuery);
     <p><strong>Country:</strong> <?= htmlspecialchars($user['country'] ?? 'N/A') ?></p>
     <p><strong>Region:</strong> <?= htmlspecialchars($user['region'] ?? 'N/A') ?></p>
 
+    <!-- Country + Region dropdown form -->
     <form method="POST" action="includes/profile-inc.php">
       <select name="countryID" id="country">
         <option value="">-- Update Country --</option>
@@ -101,17 +111,20 @@ $user = mysqli_fetch_assoc($userQuery);
       <button type="submit">Update</button>
     </form>
 
+    <!-- Profile picture upload -->
     <h3>Change Profile Picture</h3>
     <form method="POST" enctype="multipart/form-data">
       <input type="file" name="avatar" accept="image/png, image/jpeg" required>
       <button type="submit">Upload</button>
     </form>
 
+    <!-- Confirmation message -->
     <?php if (isset($_GET['success'])): ?>
       <p style="color: green;">Profile picture updated!</p>
     <?php endif; ?>
   </section>
 
+   <!--  Album Badge Section -->
   <section class="section">
     <h3>Badges</h3>
     <?php

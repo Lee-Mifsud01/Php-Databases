@@ -1,6 +1,8 @@
 <?php
+//  PROCESS USER SUBSCRIPTION PAYMENT
 session_start();
 
+//  Check that the user is logged in and required POST data exists
 if (empty($_SESSION['userID']) || !isset($_POST['subscriptionID'], $_POST['method'])) {
   header('Location: subscriptions.php?error=nopayment');
   exit();

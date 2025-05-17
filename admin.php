@@ -1,10 +1,11 @@
 <?php
+// Start the session to access user session data
 session_start();
-include 'includes/dbh.php';
+include 'includes/dbh.php'; // Database connection
 
 //Check if user is logged in
 if (!isset($_SESSION['userID'])) {
-    header("Location: login.php");
+    header("Location: login.php"); // Redirect if not logged in
     exit();
 }
 
@@ -17,8 +18,9 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $stmt->close();
 
+// If the user is not an admin, redirect them to the homepage
 if (!$row || $row['admin'] != 1) {
-    header("Location: index.php"); //redirect non-admins
+    header("Location: index.php"); 
     exit();
 }
 
@@ -26,6 +28,7 @@ include 'includes/header.php';
 include 'includes/topbar.php';
 ?>
 
+<!-- admin ui -->
 <div class="section" style="padding: 20px;">
     <h2>Admin Panel - Manage Users</h2>
 
@@ -47,10 +50,12 @@ include 'includes/topbar.php';
                 echo '<td>' . $row['userID'] . '</td>';
                 echo '<td>' . htmlspecialchars($row['email']) . '</td>';
                 echo '<td>' . ($row['admin'] ? 'Yes' : 'No') . '</td>';
+                // Delete link with confirmation prompt
                 echo '<td><a href="admin.php?delete=' . $row['userID'] . '" style="color: red;" onclick="return confirm(\'Are you sure you want to delete this user?\')">Delete</a></td>';
                 echo '</tr>';
             }
         } else {
+            // Display message if no users are found
             echo '<tr><td colspan="4">No users found.</td></tr>';
         }
         ?>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+//  Redirect if user is not logged in
 if (empty($_SESSION['userID'])) {
   header('Location: login.php');
   exit();
@@ -9,6 +10,7 @@ include 'includes/dbh.php';
 include 'includes/header.php';
 include 'includes/topbar.php';
 
+// Get search term from query string (if present)
 $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
 ?>
 
@@ -16,6 +18,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
   <section class="section">
     <h2>Search results for "<?= htmlspecialchars($searchTerm) ?>"</h2>
 
+    <!--  SEARCH TRACKS -->
     <?php if ($searchTerm): ?>
 
       <h3>Tracks</h3>
@@ -28,6 +31,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
           WHERE t.title LIKE '%" . mysqli_real_escape_string($conn, $searchTerm) . "%'
         ");
 
+        // If results found, display each track
         if (mysqli_num_rows($trackResult) > 0) {
           while ($row = mysqli_fetch_assoc($trackResult)) {
             echo '<div class="track-btn">';
@@ -48,6 +52,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
         ?>
       </div>
 
+      <!-- SEARCH ALBUMS-->
       <h3>Albums</h3>
       <div class="grid">
         <?php
@@ -75,6 +80,7 @@ $searchTerm = isset($_GET['q']) ? trim($_GET['q']) : '';
       </div>
 
     <?php else: ?>
+      <!-- If no search term provided -->
       <p>Please enter a search term.</p>
     <?php endif; ?>
   </section>

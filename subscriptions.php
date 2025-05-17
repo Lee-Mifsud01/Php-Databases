@@ -1,5 +1,6 @@
 <?php
 session_start();
+// Redirect users who are not logged in
 if (empty($_SESSION['userID'])) {
   header('Location: login.php');
   exit();
@@ -23,7 +24,7 @@ $subsQuery = mysqli_query($conn, "SELECT subscriptionID, name, price, descriptio
 <div class="indexpage">
   <section class="section">
     <h2>Subscriptions</h2>
-
+<!-- Success/Error Alerts -->
     <?php
     if (isset($_GET['success'])) {
       if ($_GET['success'] == 1) {
@@ -44,7 +45,6 @@ $subsQuery = mysqli_query($conn, "SELECT subscriptionID, name, price, descriptio
           $icon = match ($sub['name']) {
             'Free' => '🎧',
             'Plus' => '🎵',
-            'Premium' => '🚀',
             default => '💽',
           };
 

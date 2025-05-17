@@ -1,5 +1,6 @@
 <?php
 session_start();
+//  Ensure the user is logged in
 if (!isset($_SESSION['userID'])) {
   header("Location: login.php");
   exit();
@@ -10,6 +11,7 @@ include 'includes/header.php';
 include 'includes/topbar.php';
 ?>
 
+<!-- Fetch the 20 most recently added tracks along with their album and artist -->
 <div class="indexpage">
   <section class="section">
     <h2>Recently Added Tracks</h2>

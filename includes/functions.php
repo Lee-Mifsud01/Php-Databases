@@ -1,6 +1,8 @@
 <?php
 
     // Login Validtation
+
+    // Checks if either username or password is empty on login
     function emptyLoginInput($username, $password){
         $result = false;
 
@@ -10,18 +12,21 @@
 
         return $result;
     }
-
+// Checks if a user exists in the database by username or email
     function userExists($conn, $username){
         $sql = "SELECT username FROM user WHERE username = ? OR email = ?;";
         $stmt = mysqli_stmt_init($conn);
+        // Prepare statement and validate
         if(!mysqli_stmt_prepare($stmt,$sql)){
             header("location: ../profile.php?error=stmtfailed");
             exit();
         }
 
+         // Bind and execute
         mysqli_stmt_bind_param($stmt, "ss", $username, $username);
         mysqli_stmt_execute($stmt);
 
+        // Return true if user is found, false otherwise
         $result = mysqli_stmt_get_result($stmt);
         mysqli_stmt_close($stmt);
 
@@ -33,6 +38,7 @@
         }
     }
 
+    // Retrieves full user row by username or email
     function loadUserByUsernameOrEmail($conn, $input){
         $sql = "SELECT * FROM user WHERE username = ? OR email = ?;";
         $stmt = mysqli_stmt_init($conn);
@@ -55,6 +61,8 @@
 
 
     // Login Function
+
+    // Handles login logic, including password verification and session start
     function login($conn, $username, $password){
         if (!userExists($conn, $username)){
             header("location: ../login.php?error=incorrectlogin");
@@ -65,11 +73,13 @@
         $dbPassword = $user["password"];
         $checkedPassword = password_verify($password, $dbPassword);
 
+        // Verify hashed password
         if (!$checkedPassword){
             header("location: ../login.php?error=incorrectlogin");
             exit();
         }
 
+        // Start session and set user data
         session_start();
         $_SESSION["username"] = $username;
         $_SESSION["userID"] = $user["userID"];
@@ -79,6 +89,7 @@
     }
 
     //Function to delete user
+    // Deletes a user and related records in other tables 
 function deleteUser($conn, $deleteID) {
     //Delete from dependent tables first
     $tables = ['albumbadge', 'payment', 'playlist'];
@@ -93,7 +104,7 @@ function deleteUser($conn, $deleteID) {
         $stmt->close();
     }
 
-    
+    // Finally delete the user from the main user table
     $stmt = $conn->prepare("DELETE FROM user WHERE userID = ?");
     if (!$stmt) {
         echo "<p style='color:red;'>Error preparing DELETE from user</p>";
@@ -106,16 +117,18 @@ function deleteUser($conn, $deleteID) {
 }
 
 
+// DELETE TRIGGER (GET)
 
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $deleteID = (int) $_GET['delete'];
 
+    // Prevent user from deleting their own account while logged in
     if ($deleteID == $userID) {
         echo "<p style='color:red;'>You cannot delete yourself.</p>";
     } else {
         if (deleteUser($conn, $deleteID)) {
             // Redirect to avoid resubmission
-            header("Location: admin.php");
+            header("Location: admin.php"); // Redirect after deletion
             exit();
         } else {
             echo "<p style='color:red;'>Failed to delete user.</p>";
@@ -125,12 +138,14 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
 
 
 // Function to get the currently playing track
+// Uses Spotify API to return the currently playing track details
 function getCurrentlyPlaying(): ?array {
-    $token = ensureSpotifyToken();
+    $token = ensureSpotifyToken(); // Make sure we have a valid token
     if (!$token) {
-        return null;
+        return null; // API call failed or no song playing
     }
 
+    // Call Spotify API
     $ch = curl_init('https://api.spotify.com/v1/me/player/currently-playing');
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
@@ -172,11 +187,11 @@ function ensureSpotifyToken(): string {
         }
 
         // Prepare client credentials
-        $clientId = '477236a2dcd14d22b77da8db52f2b077D'; // Replace with your actual Spotify client ID
-        $clientSecret = '9500a9368925432ca4d5c3e0d3b86de8'; // Replace with your actual Spotify client secret
+        $clientId = '477236a2dcd14d22b77da8db52f2b077D'; //  Spotify client ID
+        $clientSecret = '9500a9368925432ca4d5c3e0d3b86de8'; // Spotify client secret
         $refreshToken = $_SESSION['AQAIVIJHyXzMbsaokqkF4mPh8DU-c5HMeESYwQ9eENKSZNU0x2Pu_JMUTjhgN63FmOs9wfn1CSqWcZXj5Yz8-_tIhpf3KgeGdDF4ok_RQSulPgnTHlGnvPtApdQKE3reiJ8'];
 
-        // Make a request to refresh the token
+        // Request new access token using refresh token
         $ch = curl_init('https://accounts.spotify.com/api/token');
         curl_setopt_array($ch, [
             CURLOPT_POST => true,

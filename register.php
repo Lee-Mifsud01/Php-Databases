@@ -11,6 +11,7 @@ include 'includes/dbh.php'; ?>
   <div class="login-container">
     <h2>Create Your MyTunes Account</h2>
     
+     <!--  Registration Form -->
     <form action="includes/register-inc.php" method="post">
       <input type="text" name="username" placeholder="Username" style="width: 275px;" required>
       <input type="email" name="email" placeholder="Email" style="width: 275px;" required>
@@ -18,6 +19,9 @@ include 'includes/dbh.php'; ?>
       <input type="password" name="confirm_password" placeholder="Confirm Password" style="width: 275px;" required>
       <button type="submit" name="register">Register</button>
     </form>
+
+    <!-- Error Handling
+         Displays messages based on GET parameters sent back from register-inc.php -->
     <?php
       if (isset($_GET["error"])){
         if($_GET["error"] == "passwordmismatch"){
@@ -34,7 +38,7 @@ include 'includes/dbh.php'; ?>
         }
       }
     ?>
-
+  <!--  Redirect to Login -->
     <div class="login-actions">
       <a href="login.php">Already have an account? Log in</a>
     </div>

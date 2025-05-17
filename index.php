@@ -1,4 +1,5 @@
 <?php
+// MyTunes Homepage
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -8,19 +9,20 @@ session_start();
 include 'includes/dbh.php';
 include 'includes/header.php'; 
 include 'includes/topbar.php';
-
+//  Store logged-in user's ID
 $userID = $_SESSION['userID'] ?? null;
 ?>
 
 <div class="indexpage">
   
-  <!-- SECTION: Featured Artists -->
+  <!-- Featured Artists -->
   <section class="section">
     <h2>Featured Artists</h2>
     <div class="grid">
       <?php
-      $accessToken = "BQDiSVpFkDoXnO0QjMGwqiLvrXVvHO9VOyRkjkd4h8kJuD9Q4oNC8OhqruVam6lKYDgblEO9YPwArFMXxzRs50LSyIkFZfPy66UO0msY1CdlrHmr_aKxCn3ARWgG5x_jXEzU2U6wew527wxhmrOylVHdiq5j75lcnFaKpyL7jA2y5cXv9vjg4SZ2OdWWPSMMB8M5YFajd8qC1niuOSYtvnOcFsLVx2aPL9XHR1Le91JumtRHWCHK3j4u-G4";
-
+      // Spotify Access Token (replace regularly)
+      $accessToken = "BQDoLpF49OjQ4I80i1tlOuvlDetNcRgYijlsUoPhDZRzuHdlNMjVS9Mnyr7nxZJ20zmAdVD2eZ-1RmkCD0rk8fKT4HxabtLheTkKH3OMYqTTTPsv5KaRLHN9iGhuJlEmLeW8wOUmBtvGIO2EB80HZAdFmjNw5OgcQCTbCvSROJBsbhRTIT4MV21eKQgKAsKg7ZiL-0pCVBEbIQ0IWyZpARkGW8Erz-uqrbwU9wuLcg3ElosWsh-UX6-Wd2I";
+      //  Pull top 6 artists from local DB
       $result = mysqli_query($conn, "SELECT artistID, name FROM artist LIMIT 6");
       if ($result && mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
@@ -28,10 +30,11 @@ $userID = $_SESSION['userID'] ?? null;
           $artistName = $row['name'];
           $imageUrl = null;
 
-          // Query Spotify API
+          /// Search artist on Spotify to get image
           $query = urlencode($artistName);
           $url = "https://api.spotify.com/v1/search?q={$query}&type=artist&limit=1";
 
+          // Make cURL request
           $ch = curl_init();
           curl_setopt($ch, CURLOPT_URL, $url);
           curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -42,10 +45,12 @@ $userID = $_SESSION['userID'] ?? null;
           curl_close($ch);
 
           $spotifyData = json_decode($response, true);
+          //  Get first image URL (if available)
           if (!empty($spotifyData['artists']['items'][0]['images'][0]['url'])) {
             $imageUrl = $spotifyData['artists']['items'][0]['images'][0]['url'];
           }
 
+          //  Display artist card
           echo '<a href="artist.php?id=' . $artistID . '" class="card-link">';
           echo '<div class="card">';
           if ($imageUrl) {
@@ -66,11 +71,12 @@ $userID = $_SESSION['userID'] ?? null;
   </section>
 
 
- <!-- SECTION: Trending Albums -->
+ <!-- Trending Albums -->
   <section class="section">
     <h2>Trending Albums</h2>
     <div class="grid">
       <?php
+      // Pull album data and cover image from entityimages
       $query = "
         SELECT a.albumID, a.title, i.url
         FROM album a
@@ -112,6 +118,7 @@ $userID = $_SESSION['userID'] ?? null;
     <h2>Recently Added Tracks</h2>
     <div class="list track-list">
       <?php
+      //  Query most recent 5 tracks
       $result = mysqli_query($conn, "
       SELECT t.trackID, t.title AS track_title, a.title AS album_title
       FROM track t

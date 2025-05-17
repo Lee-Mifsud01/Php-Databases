@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 //  Get the access token 
-$accessToken = "BQDiSVpFkDoXnO0QjMGwqiLvrXVvHO9VOyRkjkd4h8kJuD9Q4oNC8OhqruVam6lKYDgblEO9YPwArFMXxzRs50LSyIkFZfPy66UO0msY1CdlrHmr_aKxCn3ARWgG5x_jXEzU2U6wew527wxhmrOylVHdiq5j75lcnFaKpyL7jA2y5cXv9vjg4SZ2OdWWPSMMB8M5YFajd8qC1niuOSYtvnOcFsLVx2aPL9XHR1Le91JumtRHWCHK3j4u-G4"; // Always replace with the currentaccess token
+$accessToken = "BQDoLpF49OjQ4I80i1tlOuvlDetNcRgYijlsUoPhDZRzuHdlNMjVS9Mnyr7nxZJ20zmAdVD2eZ-1RmkCD0rk8fKT4HxabtLheTkKH3OMYqTTTPsv5KaRLHN9iGhuJlEmLeW8wOUmBtvGIO2EB80HZAdFmjNw5OgcQCTbCvSROJBsbhRTIT4MV21eKQgKAsKg7ZiL-0pCVBEbIQ0IWyZpARkGW8Erz-uqrbwU9wuLcg3ElosWsh-UX6-Wd2I"; // Always replace with the currentaccess token
 
 // Set up the Spotify API URL for the "currently playing" track
 $url = "https://api.spotify.com/v1/me/player/currently-playing";
@@ -42,7 +42,7 @@ include_once __DIR__ . '/dbh.php';
 // Get the currently playing track from Spotify (or null if no track is playing)
 $current = getCurrentlyPlaying();
 
-// Avatar lookup — default then override if user has one
+// Avatar lookup: default then override if user has one
 $userID    = $_SESSION['userID'] ?? null;
 $avatarUrl = 'images/avatar-placeholder.jpg';
 
@@ -83,7 +83,7 @@ if ($userID) {
 </button>
 </div>
 
-  <!-- Center: currently playing -->
+  <!-- currently playing -->
   <div class="track-display">
   <?php if ($trackName): ?>
     <h2>Currently Playing: <?= htmlspecialchars($trackName) ?></h2>
@@ -98,7 +98,7 @@ if ($userID) {
   <?php endif; ?>
 
 
-  <!-- Right: volume + profile -->
+  <!--volume + profile -->
   <div class="topbar-right">
     <input type="range" min="0" max="100" value="70" aria-label="Volume" id="slider">
 

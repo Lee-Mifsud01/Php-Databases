@@ -1,5 +1,7 @@
 <?php
+// Payment Receipt Page
 session_start();
+//  Redirect if user is not logged in
 if (empty($_SESSION['userID'])) {
   header('Location: login.php');
   exit();
@@ -7,6 +9,7 @@ if (empty($_SESSION['userID'])) {
 
 include 'includes/dbh.php';
 
+//  Store logged-in user ID
 $userID = $_SESSION['userID'];
 
 // Get latest payment for user
@@ -19,14 +22,17 @@ $receiptQuery = mysqli_query($conn, "
   LIMIT 1
 ");
 
+// If no payment found, show message
 if (!$receiptQuery || mysqli_num_rows($receiptQuery) === 0) {
   echo "No recent payments found.";
   exit();
 }
 
+// Store result as associative array
 $receipt = mysqli_fetch_assoc($receiptQuery);
 ?>
 
+<!--  Receipt UI -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,6 +42,7 @@ $receipt = mysqli_fetch_assoc($receiptQuery);
 </head>
 <body class="login-body">
   <div class="login-container">
+     <!-- Display payment information -->
     <h2>Payment Receipt</h2>
     <p><strong>Plan:</strong> <?= htmlspecialchars($receipt['planName']) ?></p>
     <p><strong>Description:</strong> <?= htmlspecialchars($receipt['description']) ?></p>
