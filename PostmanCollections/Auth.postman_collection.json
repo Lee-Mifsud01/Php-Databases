@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "ac431adb-dfb7-48f2-8d38-c82a6f40f238",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41844347",
+		"_collection_link": "https://php666-4375.postman.co/workspace/mytunes~d48154f0-1c4a-4029-aef8-4fdd541ac608/collection/41844347-ac431adb-dfb7-48f2-8d38-c82a6f40f238?action=share&source=collection_link&creator=41844347"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username_email\": \"admin\",\n  \"password\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/login_user.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"login_user.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userID\": 1002,\n  \"username\": \"testuser\",\n  \"email\": \"test@mail.com\",\n  \"password\": \"1234\",\n  \"pressingID\": 1,\n  \"countryID\": 1\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/register_user.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"register_user.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"7e0f14c6f5eea4630de0a704a5a2c3efc4f49782c2969d3a05b20c9810be24b6\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/delete_user.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"delete_user.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"7e0f14c6f5eea4630de0a704a5a2c3efc4f49782c2969d3a05b20c9810be24b6\",\n  \"username\": \"updatedname\",\n  \"email\": \"updated@mail.com\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/update_user_profile.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"update_user_profile.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "7e0f14c6f5eea4630de0a704a5a2c3efc4f49782c2969d3a05b20c9810be24b6",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"message\": \"Login successful\",\n  \"userID\": 1234,\n  \"username\": \"admin\",\n  \"token\": \"7e0f14c6f5eea4630de0a704a5a2c3efc4f49782c2969d3a05b20c9810be24b6\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/logout_user.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"logout_user.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"ae29401a0ba8ecbedb02198f1aa3e319c3d6f1e7388768e3cb216b63f7540702\",\n  \"current_password\": \"1111\",\n  \"new_password\": \"1122\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/change_password.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"change_password.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Profile",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/get_user_profile.php?userID=1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"get_user_profile.php"
+					],
+					"query": [
+						{
+							"key": "userID",
+							"value": "1001"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

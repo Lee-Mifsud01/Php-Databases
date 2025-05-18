@@ -1,0 +1,266 @@
+{
+	"info": {
+		"_postman_id": "1b39b6d9-a61e-41cf-a9b0-699dde91647a",
+		"name": "Content",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41844347",
+		"_collection_link": "https://php666-4375.postman.co/workspace/mytunes~d48154f0-1c4a-4029-aef8-4fdd541ac608/collection/41844347-1b39b6d9-a61e-41cf-a9b0-699dde91647a?action=share&source=collection_link&creator=41844347"
+	},
+	"item": [
+		{
+			"name": "Get Albums",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/get_albums.php?artistID=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"get_albums.php"
+					],
+					"query": [
+						{
+							"key": "artistID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Album",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/get_album.php?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"get_album.php"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Artists",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/get_artists.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"get_artists.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Track",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/get_track.php?albumID=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"get_track.php"
+					],
+					"query": [
+						{
+							"key": "albumID",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tracks",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/get_tracks.php?albumID=2002",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"get_tracks.php"
+					],
+					"query": [
+						{
+							"key": "albumID",
+							"value": "2002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Artists",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"artistID\": 1001,\n  \"name\": \"Lady Gaga\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/add_artists.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"add_artists.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Album",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"albumID\": 2002,\n  \"title\": \"Chromatica\",\n  \"releaseDate\": \"2020-05-29 00:00:00\",\n  \"artistID\": 1001,\n  \"genreID\": null\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/add_album.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"add_album.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Track",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"trackID\": 3001,\n  \"title\": \"Rain On Me\",\n  \"albumID\": 2002\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/add_track.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"add_track.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

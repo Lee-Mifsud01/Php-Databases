@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "25b931ed-9d94-46fc-824c-8233a5caf225",
+		"name": "Upload",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41844347",
+		"_collection_link": "https://php666-4375.postman.co/workspace/mytunes~d48154f0-1c4a-4029-aef8-4fdd541ac608/collection/41844347-25b931ed-9d94-46fc-824c-8233a5caf225?action=share&source=collection_link&creator=41844347"
+	},
+	"item": [
+		{
+			"name": "Upload Image",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "albumID",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "img",
+							"type": "file",
+							"src": "/Users/lyonamanche/Downloads/486462937_1728249571092280_6302749464741525946_n.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/upload_album_image.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"upload_album_image.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Track File",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "trackID",
+							"value": "1001",
+							"type": "text"
+						},
+						{
+							"key": "audio",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8888/php-databases/api/upload_track_file.php",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"php-databases",
+						"api",
+						"upload_track_file.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

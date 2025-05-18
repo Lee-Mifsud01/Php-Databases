@@ -34,7 +34,7 @@ include 'includes/dbh.php'; ?>
           echo "<p>Please fill in all the empty fields</p>";
         } 
         if($_GET["error"] == "usertaken"){
-          echo "<p>Username is taken</p>";
+          echo "<p>Username/Email already used</p>";
         }
       }
     ?>

@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "7e9f026c-ad9f-4bd1-8d34-681a38d4cbbd",
+		"name": "Spotify",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41844347",
+		"_collection_link": "https://php666-4375.postman.co/workspace/mytunes~d48154f0-1c4a-4029-aef8-4fdd541ac608/collection/41844372-7e9f026c-ad9f-4bd1-8d34-681a38d4cbbd?action=share&source=collection_link&creator=41844347"
+	},
+	"item": [
+		{
+			"name": "Get Access Token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic NDc3MjM2YTJkY2QxNGQyMmI3N2RhOGRiNTJmMmIwNzc6OTUwMGE5MzY4OTI1NDMyY2E0ZDVjM2UwZDNiODZkZTg=",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://accounts.spotify.com/api/token",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Artist",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer BQBQQaWygKrylu7gMsp0eRk4n6cQTaa5Nf_VQws9WwWw9QmkXNDCbCT-6j1cE2wzgGFuDu6W7d7zuA5RIW7IVCNzvotScO-drziP9qiygydMazxAgH0kars6fMebzvJPrxKC1EaADLg7kcrzdUYeUBhks_95VV8x7q3BTUwlaqyJAUYjmzDSnnmygDzEsTyx3thWQUyu_WTJjNJNdSH26IcpKIKh3NpDE6vdF_Za0Tk",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.spotify.com/v1/search?q=Drake&type=artist&limit=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"v1",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Drake"
+						},
+						{
+							"key": "type",
+							"value": "artist"
+						},
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spotify Authorize",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.spotify.com/authorize?response_type=code&client_id={{client_id}}&scope=user-read-email playlist-read-private offline_access&redirect_uri={{redirect_uri}}",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "client_id",
+							"value": "{{client_id}}"
+						},
+						{
+							"key": "scope",
+							"value": "user-read-email playlist-read-private offline_access"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "{{redirect_uri}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let json = pm.response.json();",
+							"pm.environment.set(\"access_token\", json.access_token);",
+							"if (json.refresh_token) {",
+							"  pm.environment.set(\"refresh_token\", json.refresh_token);",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "9500a9368925432ca4d5c3e0d3b86de8",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "477236a2dcd14d22b77da8db52f2b077",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic <base64(client_id:client_secret)>",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "AQAIVIJHyXzMbsaokqkF4mPh8DU-c5HMeESYwQ9eENKSZNU0x2Pu_JMUTjhgN63FmOs9wfn1CSqWcZXj5Yz8-_tIhpf3KgeGdDF4ok_RQSulPgnTHlGnvPtApdQKE3reiJ8",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://accounts.spotify.com/api/token",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Spotify Profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.spotify.com/v1/me",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"v1",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Currently Playing",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": " Bearer BQD-FIeuIT5__g2IJXr5sfGZhZ8uGUfKt_BxNN2AMSt3_n9A8WR-hYFBUMkaES4dL3D-cu0D_JVTVwLzGWxGcnDp4Cgap12VsWhN3s2kjlzCSP26VuVX0BqsrDtJy3oy_Z3cRTWzfSyuAqNxEpdaPDSugLosfXkfAGOyvGq7y9XMDE53CgmAmHT6TIhIdG5orWcdozklRU8VQb9s1EcioO-QnQSt9ffvFdrat399oUuDq3xoLVOPP3cVRuM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.spotify.com/v1/me/player/currently-playing",
+					"protocol": "https",
+					"host": [
+						"api",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"v1",
+						"me",
+						"player",
+						"currently-playing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://open.spotify.com/playlist/7HGXjARrNhTaf19YX8o9u4",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://open.spotify.com/playlist/7HGXjARrNhTaf19YX8o9u4",
+					"protocol": "https",
+					"host": [
+						"open",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"playlist",
+						"7HGXjARrNhTaf19YX8o9u4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
