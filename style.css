@@ -18,9 +18,8 @@ body {
   padding: 2rem;
 }
 
-/* ----------------------------- */
 /* LOGIN + REGISTER STYLES      */
-/* ----------------------------- */
+
 body.login-body {
   display: flex;
   align-items: center;
@@ -109,9 +108,8 @@ body.login-body {
   box-shadow: 3px 3px 6px #0a0a0a, -3px -3px 6px #2e2e2e;
 }
 
-/* ----------------------------- */
+
 /* LOGIN WITH GOOGLE STYLES      */
-/* ----------------------------- */
 .google-btn img {
   display: block;
   width: 240px;
@@ -119,9 +117,7 @@ body.login-body {
   margin: 0 auto;
 }
 
-/* ----------------------------- */
-/* SIDEBAR STYLES               */
-/* ----------------------------- */
+/* SIDEBAR STYLES           */
 
 #MyTunes-logo {
   width: 64px;
@@ -306,9 +302,9 @@ body.login-body {
   background: #333;
 }
 
-/* ----------------------------- */
+
 /* TOPBAR STYLES                */
-/* ----------------------------- */
+
 .topbar {
   position: sticky;
   top: 0;
@@ -523,12 +519,8 @@ body.login-body {
   transform: perspective(300px) rotateY(-6deg) scale(1.03) translateX(6px);
 }
 
-
-
-
-/* ----------------------------- */
 /* INDEX PAGE CONTENT SECTIONS    */
-/* ----------------------------- */
+
 .section {
   margin-bottom: 3rem;
 }
@@ -677,10 +669,8 @@ body.login-body {
   color: inherit;
 }
 
-
-/* ----------------------------- */
 /* LIST STYLES                   */
-/* ----------------------------- */
+
 .list {
   display: flex;
   flex-direction: column;
@@ -693,9 +683,8 @@ body.login-body {
   border-radius: 6px;
 }
 
-/* ----------------------------- */
 /* CARD LINKS & BUTTONS          */
-/* ----------------------------- */
+
 .purchase-btn,
 .btn-more,
 .cancel-btn,
@@ -749,9 +738,9 @@ body.login-body {
   width: 100%;
 }
 
-/* ----------------------------- */
+
 /* PROFILE CONTENT SECTION       */
-/* ----------------------------- */
+
 .profile-info {
   display: flex;
   align-items: center;
@@ -770,9 +759,9 @@ body.login-body {
   justify-content: center;
 }
 
-/* ----------------------------- */
+
 /* BADGE GRID                    */
-/* ----------------------------- */
+
 .badge-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -791,9 +780,8 @@ body.login-body {
   margin-bottom: 0.5rem;
 }
 
-/* ----------------------------- */
 /* SEARCH BOX                    */
-/* ----------------------------- */
+
 .search-bar input {
   padding: 0.5rem;
   width: 100%;
@@ -803,9 +791,8 @@ body.login-body {
   color: white;
 }
 
-/* ----------------------------- */
 /* index-button icon sizing/clip  */
-/* ----------------------------- */
+
 .sidebar .index-btn { 
   margin-top: 1rem !important; 
   margin-left: 0.5rem !important; 
@@ -820,9 +807,9 @@ body.login-body {
   margin: auto !important;
 }
 
-/* ============================= */
+
 /* Avatar                        */
-/* ============================= */
+
 
 .profile-dropdown .avatar-btn {
   width: 40px !important;
@@ -843,9 +830,9 @@ body.login-body {
   display: block !important;
 }
 
-/* ============================= */
+
 /* Subscription Cards Enhancements */
-/* ============================= */
+
 
 .card p strong {
   color: #ccc;
@@ -883,9 +870,9 @@ body.login-body {
   gap: 2rem;
 }
 
-/* ----------------------------- */
+
 /* ICONS                         */
-/* ----------------------------- */
+
 .icons {
   max-width: 15px;
   max-height: 15px;
