@@ -64,7 +64,7 @@ PHP-DATABASES/
 
 ## Setup Instructions
 
-⚙️ Setup Instructions
+Setup Instructions
 
 1. Clone the Repository
 
@@ -109,6 +109,25 @@ Replace YOUR_USER_ID with the ID of the user you want to make an admin.
 
 Once done, the user will see an "Admin Panel" link in the sidebar after login.
 
+
+#Updating the Spotify API Access Token
+
+Spotify requires a valid access token for artist lookups and image rendering.
+
+Steps:
+Go to your Spotify refresh token request (Postman in refresh token request).
+Press Send to generate a new access token.
+Copy the access_token value from the response.
+Where to Paste the New Token:
+Update the $accessToken variable in these files:
+
+artist.php
+index.php
+includes/topbar.php
+Example:
+
+$accessToken = "NEWLY_GENERATED_ACCESS_TOKEN";
+Update this string whenever the token expires (roughly every hour).
 
 Authors
 
